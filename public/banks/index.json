@@ -1,0 +1,38 @@
+[
+  {
+    "id": "github",
+    "name": "GitHub Practice Exam",
+    "icon": "🐙",
+    "description": "77 scenario-based questions from the community CCA-F practice exam",
+    "file": "github.json",
+    "count": 77,
+    "isDefault": true
+  },
+  {
+    "id": "official",
+    "name": "Official Anthropic Samples",
+    "icon": "⭐",
+    "description": "12 official questions from the Anthropic CCA-F exam guide",
+    "file": "official.json",
+    "count": 12,
+    "isDefault": false
+  },
+  {
+    "id": "claudeprepareexam",
+    "name": "ClaudePrepareExam",
+    "icon": "🧠",
+    "description": "93 AI-generated practice questions across all 5 domains",
+    "file": "claudeprepareexam.json",
+    "count": 93,
+    "isDefault": false
+  },
+  {
+    "id": "all",
+    "name": "Complete Bank",
+    "icon": "📚",
+    "description": "All 170 questions combined from every source",
+    "file": "all.json",
+    "count": 170,
+    "isDefault": false
+  }
+]

@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0.08 265);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0.165 254.624);
+  --correct: oklch(0.62 0.19 145);
+  --correct-bg: oklch(0.95 0.05 145);
+  --wrong: oklch(0.577 0.245 27.325);
+  --wrong-bg: oklch(0.95 0.05 27);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Mermaid diagram container */
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Markdown prose styles */
+.prose h1 { font-size: 1.875rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; }
+.prose h2 { font-size: 1.5rem; font-weight: 700; margin-top: 1.75rem; margin-bottom: 0.75rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+.prose h3 { font-size: 1.25rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+.prose p { margin-bottom: 0.75rem; line-height: 1.7; }
+.prose ul, .prose ol { margin-bottom: 0.75rem; padding-left: 1.5rem; }
+.prose li { margin-bottom: 0.25rem; line-height: 1.6; }
+.prose code { background: var(--muted); padding: 0.15rem 0.4rem; border-radius: 0.25rem; font-size: 0.875rem; }
+.prose pre { background: oklch(0.17 0 0); color: oklch(0.9 0 0); padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin-bottom: 1rem; }
+.prose pre code { background: transparent; padding: 0; }
+.prose table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: 0.875rem; }
+.prose th, .prose td { border: 1px solid var(--border); padding: 0.5rem 0.75rem; text-align: left; }
+.prose th { background: var(--muted); font-weight: 600; }
+.prose blockquote { border-left: 3px solid var(--primary); padding-left: 1rem; margin: 1rem 0; color: var(--muted-foreground); }
+.prose strong { font-weight: 700; }
+.prose hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+.prose a { color: var(--primary); text-decoration: underline; }
