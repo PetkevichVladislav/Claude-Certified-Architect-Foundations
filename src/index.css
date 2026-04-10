@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html {
+  transition: font-size 0.2s ease;
+}
+
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);

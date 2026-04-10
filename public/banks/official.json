@@ -22,7 +22,7 @@
           "label": "B",
           "text": "Enhance the system prompt to state that customer verification via `get_customer` is mandatory before any order operations",
           "isCorrect": false,
-          "explanation": "Prompt instructions are probabilistic — the 12% skip rate exists despite the model generally knowing the right sequence. When errors have financial consequences, probabilistic compliance is unacceptable."
+          "explanation": "Prompt instructions are probabilistic - the 12% skip rate exists despite the model generally knowing the right sequence. When errors have financial consequences, probabilistic compliance is unacceptable."
         },
         {
           "label": "C",
@@ -34,10 +34,11 @@
           "label": "D",
           "text": "Implement a routing classifier that analyzes each request and enables only the subset of tools appropriate for that request type",
           "isCorrect": false,
-          "explanation": "A routing classifier addresses which tools are available, not what order they must be called in. Solves tool selection, not tool sequencing — which is the actual problem."
+          "explanation": "A routing classifier addresses which tools are available, not what order they must be called in. Solves tool selection, not tool sequencing - which is the actual problem."
         }
       ],
-      "algorithmTrace": "B and C are prompt-based → anti-pattern for deterministic business rules → eliminate. D solves wrong problem. A is programmatic enforcement → CODE > PROMPTS → select A."
+      "algorithmTrace": "B and C are prompt-based → anti-pattern for deterministic business rules → eliminate. D solves wrong problem. A is programmatic enforcement → CODE > PROMPTS → select A.",
+      "source": "official"
     },
     {
       "id": 2,
@@ -49,7 +50,7 @@
       "options": [
         {
           "label": "A",
-          "text": "Add few-shot examples to the system prompt demonstrating correct tool selection patterns, with 5–8 examples",
+          "text": "Add few-shot examples to the system prompt demonstrating correct tool selection patterns, with 5â€“8 examples",
           "isCorrect": false,
           "explanation": "Few-shot examples add token overhead without fixing the root cause: the model can't distinguish between tools because descriptions are minimal. Descriptions are the primary selection signal."
         },
@@ -69,10 +70,11 @@
           "label": "D",
           "text": "Consolidate both tools into a single `lookup_entity` tool that accepts any identifier and internally determines which backend to query",
           "isCorrect": false,
-          "explanation": "Valid architectural choice but requires backend changes. The question asks for the most effective first step — description improvement is faster and often sufficient."
+          "explanation": "Valid architectural choice but requires backend changes. The question asks for the most effective first step - description improvement is faster and often sufficient."
         }
       ],
-      "algorithmTrace": "C = NL parsing anti-pattern → eliminate. A adds overhead without fixing root cause. D is valid but heavy for a 'first step'. B is built-in mechanism → BUILT-IN > CUSTOM → select B."
+      "algorithmTrace": "C = NL parsing anti-pattern → eliminate. A adds overhead without fixing root cause. D is valid but heavy for a 'first step'. B is built-in mechanism → BUILT-IN > CUSTOM → select B.",
+      "source": "official"
     },
     {
       "id": 3,
@@ -90,9 +92,9 @@
         },
         {
           "label": "B",
-          "text": "Have the agent self-report a confidence score (1–10) and automatically route requests to humans below a threshold",
+          "text": "Have the agent self-report a confidence score (1â€“10) and automatically route requests to humans below a threshold",
           "isCorrect": false,
-          "explanation": "LLM self-reported confidence is poorly calibrated — the agent is already incorrectly confident on hard cases. A confidence score encodes the same bad calibration numerically."
+          "explanation": "LLM self-reported confidence is poorly calibrated - the agent is already incorrectly confident on hard cases. A confidence score encodes the same bad calibration numerically."
         },
         {
           "label": "C",
@@ -104,10 +106,11 @@
           "label": "D",
           "text": "Implement sentiment analysis to detect customer frustration levels and automatically escalate when threshold exceeded",
           "isCorrect": false,
-          "explanation": "Sentiment-based escalation is an explicit exam anti-pattern. Sentiment doesn't correlate with case complexity — an angry customer with a standard replacement is still simple."
+          "explanation": "Sentiment-based escalation is an explicit exam anti-pattern. Sentiment doesn't correlate with case complexity - an angry customer with a standard replacement is still simple."
         }
       ],
-      "algorithmTrace": "B = self-reported confidence → unreliable → eliminate. D = sentiment-based escalation → anti-pattern → eliminate. C = over-engineered. A = explicit criteria → EXPLICIT > IMPLICIT → select A."
+      "algorithmTrace": "B = self-reported confidence → unreliable → eliminate. D = sentiment-based escalation → anti-pattern → eliminate. C = over-engineered. A = explicit criteria → EXPLICIT > IMPLICIT → select A.",
+      "source": "official"
     },
     {
       "id": 4,
@@ -141,7 +144,8 @@
           "isCorrect": false,
           "explanation": "`.claude/config.json` with a `commands` array is a fabricated configuration mechanism that does not exist in Claude Code. Trap answer."
         }
-      ]
+      ],
+      "source": "official"
     },
     {
       "id": 5,
@@ -155,7 +159,7 @@
           "label": "A",
           "text": "Enter plan mode to explore the codebase, understand dependencies, and design an implementation approach before making changes",
           "isCorrect": true,
-          "explanation": "Plan mode is designed for complex tasks involving large-scale changes, multiple valid approaches, and architectural decisions — exactly what monolith restructuring requires."
+          "explanation": "Plan mode is designed for complex tasks involving large-scale changes, multiple valid approaches, and architectural decisions - exactly what monolith restructuring requires."
         },
         {
           "label": "B",
@@ -173,9 +177,10 @@
           "label": "D",
           "text": "Begin in direct execution mode and only switch to plan mode if you encounter unexpected complexity",
           "isCorrect": false,
-          "explanation": "The complexity is already stated in the requirements — it's not something that 'might emerge later.' Ignoring obvious complexity wastes time."
+          "explanation": "The complexity is already stated in the requirements - it's not something that 'might emerge later.' Ignoring obvious complexity wastes time."
         }
-      ]
+      ],
+      "source": "official"
     },
     {
       "id": 6,
@@ -195,7 +200,7 @@
           "label": "B",
           "text": "Consolidate all conventions in the root CLAUDE.md file under headers for each area, relying on Claude to infer which applies",
           "isCorrect": false,
-          "explanation": "Relies on Claude inferring which section applies — unreliable. Also wastes tokens loading all conventions when only some are relevant. EXPLICIT > IMPLICIT."
+          "explanation": "Relies on Claude inferring which section applies - unreliable. Also wastes tokens loading all conventions when only some are relevant. EXPLICIT > IMPLICIT."
         },
         {
           "label": "C",
@@ -207,9 +212,10 @@
           "label": "D",
           "text": "Place a separate CLAUDE.md file in each subdirectory containing that area's specific conventions",
           "isCorrect": false,
-          "explanation": "Subdirectory CLAUDE.md files are directory-bound. If test files are spread across many directories, you'd need duplicate files everywhere — unmaintainable."
+          "explanation": "Subdirectory CLAUDE.md files are directory-bound. If test files are spread across many directories, you'd need duplicate files everywhere - unmaintainable."
         }
-      ]
+      ],
+      "source": "official"
     },
     {
       "id": 7,
@@ -229,7 +235,7 @@
           "label": "B",
           "text": "The coordinator agent's task decomposition is too narrow, resulting in incomplete coverage",
           "isCorrect": true,
-          "explanation": "The coordinator's logs directly reveal the root cause: it decomposed 'creative industries' into only visual arts subtasks. Subagents executed correctly — the problem is what they were assigned."
+          "explanation": "The coordinator's logs directly reveal the root cause: it decomposed 'creative industries' into only visual arts subtasks. Subagents executed correctly - the problem is what they were assigned."
         },
         {
           "label": "C",
@@ -241,9 +247,10 @@
           "label": "D",
           "text": "The document analysis agent is filtering out non-visual creative industry sources",
           "isCorrect": false,
-          "explanation": "The document analysis agent was never given non-visual sources to analyze. It didn't filter anything — it simply worked within its assigned scope."
+          "explanation": "The document analysis agent was never given non-visual sources to analyze. It didn't filter anything - it simply worked within its assigned scope."
         }
-      ]
+      ],
+      "source": "official"
     },
     {
       "id": 8,
@@ -257,7 +264,7 @@
           "label": "A",
           "text": "Return structured error context including failure type, attempted query, partial results, and alternative approaches",
           "isCorrect": true,
-          "explanation": "Structured error context gives the coordinator all information needed for intelligent recovery — retry with modified query, try alternatives, or proceed with partial results."
+          "explanation": "Structured error context gives the coordinator all information needed for intelligent recovery - retry with modified query, try alternatives, or proceed with partial results."
         },
         {
           "label": "B",
@@ -277,7 +284,8 @@
           "isCorrect": false,
           "explanation": "Over-reaction. The coordinator could retry, delegate to another subagent, or proceed with partial results. Complete termination wastes all completed work."
         }
-      ]
+      ],
+      "source": "official"
     },
     {
       "id": 9,
@@ -285,7 +293,7 @@
       "domainShort": "D1",
       "scenario": "Multi-Agent Research System",
       "isOfficial": true,
-      "question": "The synthesis agent frequently needs to verify claims, requiring 2–3 round trips through the coordinator to the web search agent (40% latency increase). 85% are simple fact-checks, 15% need deep investigation. What's the most effective approach?",
+      "question": "The synthesis agent frequently needs to verify claims, requiring 2â€“3 round trips through the coordinator to the web search agent (40% latency increase). 85% are simple fact-checks, 15% need deep investigation. What's the most effective approach?",
       "options": [
         {
           "label": "A",
@@ -297,7 +305,7 @@
           "label": "B",
           "text": "Have synthesis accumulate all verification needs and batch them to the coordinator at the end",
           "isCorrect": false,
-          "explanation": "Batching creates blocking dependencies — synthesis steps may depend on earlier verified facts. Can't synthesize paragraph 3 if paragraph 1's fact-check hasn't returned."
+          "explanation": "Batching creates blocking dependencies - synthesis steps may depend on earlier verified facts. Can't synthesize paragraph 3 if paragraph 1's fact-check hasn't returned."
         },
         {
           "label": "C",
@@ -311,7 +319,8 @@
           "isCorrect": false,
           "explanation": "Speculative caching cannot reliably predict what synthesis will need to verify. Over-fetches in most cases while still missing some verification needs."
         }
-      ]
+      ],
+      "source": "official"
     },
     {
       "id": 10,
@@ -345,7 +354,8 @@
           "isCorrect": false,
           "explanation": "`--batch` is a fabricated flag that does not exist in Claude Code. The real flag is `-p` / `--print`."
         }
-      ]
+      ],
+      "source": "official"
     },
     {
       "id": 11,
@@ -379,7 +389,8 @@
           "isCorrect": false,
           "explanation": "Over-engineered. The simpler solution is matching each API to its appropriate use case. No fallback logic needed."
         }
-      ]
+      ],
+      "source": "official"
     },
     {
       "id": 12,
@@ -397,7 +408,7 @@
         },
         {
           "label": "B",
-          "text": "Require developers to split large PRs into smaller submissions of 3–4 files",
+          "text": "Require developers to split large PRs into smaller submissions of 3â€“4 files",
           "isCorrect": false,
           "explanation": "Shifts burden to developers without improving the system. Large PRs are sometimes necessary."
         },
@@ -405,7 +416,7 @@
           "label": "C",
           "text": "Switch to a higher-tier model with a larger context window",
           "isCorrect": false,
-          "explanation": "Larger context windows don't solve attention quality issues. The problem isn't capacity — it's attention distribution."
+          "explanation": "Larger context windows don't solve attention quality issues. The problem isn't capacity - it's attention distribution."
         },
         {
           "label": "D",
@@ -413,7 +424,11 @@
           "isCorrect": false,
           "explanation": "Requiring consensus suppresses real bugs caught intermittently. Reduces sensitivity without addressing root cause."
         }
-      ]
+      ],
+      "source": "official"
     }
-  ]
+  ],
+  "disclaimer": "Official sample questions from the Anthropic CCA-F exam guide. Used for educational preparation purposes only.",
+  "isDefault": false,
+  "sourceUrl": "https://www.anthropic.com/certification"
 }

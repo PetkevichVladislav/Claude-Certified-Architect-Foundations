@@ -35,7 +35,8 @@
           "isCorrect": false,
           "explanation": "The model can return text alongside tool calls (explaining actions), or tool calls without text. Text presence is not a reliable proxy for task completion."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 14,
@@ -48,7 +49,7 @@
           "label": "A",
           "text": "Subagents automatically inherit the coordinator's full conversation history",
           "isCorrect": false,
-          "explanation": "Subagents operate with isolated context — they do NOT inherit the coordinator's history automatically. Key exam concept."
+          "explanation": "Subagents operate with isolated context â€” they do NOT inherit the coordinator's history automatically. Key exam concept."
         },
         {
           "label": "B",
@@ -68,7 +69,8 @@
           "isCorrect": false,
           "explanation": "Claude does not cache subagent context across sessions or make findings automatically available to other subagents."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 15,
@@ -101,7 +103,8 @@
           "isCorrect": false,
           "explanation": "Three coordinators duplicate orchestration logic and break the hub-and-spoke pattern."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 16,
@@ -126,7 +129,7 @@
           "label": "C",
           "text": "Bold and capitalize the rule: \"**CRITICAL: NEVER process refunds > $500**\"",
           "isCorrect": false,
-          "explanation": "Formatting emphasis has marginal effect on compliance rates. The model already 'knows' the rule — the issue is probabilistic adherence."
+          "explanation": "Formatting emphasis has marginal effect on compliance rates. The model already 'knows' the rule â€” the issue is probabilistic adherence."
         },
         {
           "label": "D",
@@ -134,7 +137,8 @@
           "isCorrect": false,
           "explanation": "Same-session self-review anti-pattern. The agent retains the same reasoning context and is unlikely to contradict its initial decision."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 17,
@@ -159,15 +163,16 @@
           "label": "C",
           "text": "Single-pass: provide all 15 files in one prompt with instructions for both checks",
           "isCorrect": false,
-          "explanation": "Processing 15 files simultaneously causes attention dilution — inconsistent depth, missed bugs, contradictory feedback."
+          "explanation": "Processing 15 files simultaneously causes attention dilution â€” inconsistent depth, missed bugs, contradictory feedback."
         },
         {
           "label": "D",
           "text": "Three-stage pipeline: quality checker → architecture checker → integration checker per file",
           "isCorrect": false,
-          "explanation": "Over-engineered sequential bottleneck. Architecture check can't work per-file — it needs cross-file context."
+          "explanation": "Over-engineered sequential bottleneck. Architecture check can't work per-file â€” it needs cross-file context."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 18,
@@ -178,7 +183,7 @@
       "options": [
         {
           "label": "A",
-          "text": "Continue — the model has all the information in its context",
+          "text": "Continue â€” the model has all the information in its context",
           "isCorrect": false,
           "explanation": "Referencing 'typical patterns' instead of specifics is a context degradation signal. Continuing produces increasingly unreliable results."
         },
@@ -198,9 +203,10 @@
           "label": "D",
           "text": "Use `--resume` to restore a checkpoint from earlier",
           "isCorrect": false,
-          "explanation": "`--resume` continues the same session — it doesn't reduce context. Degraded context remains degraded."
+          "explanation": "`--resume` continues the same session â€” it doesn't reduce context. Degraded context remains degraded."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 19,
@@ -233,7 +239,8 @@
           "isCorrect": false,
           "explanation": "Few-shot examples improve consistency but cannot guarantee the full sequence. Still prompt-based."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 20,
@@ -266,20 +273,21 @@
           "isCorrect": false,
           "explanation": "Better descriptions help understanding but don't help actually comparing different format timestamps."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 21,
       "domain": "Agentic Architecture & Orchestration",
       "domainShort": "D1",
       "isOfficial": false,
-      "question": "You're evaluating two refactoring strategies — Strategy A (extract service) vs Strategy B (extract library). You want to explore both without cross-contamination. Best approach?",
+      "question": "You're evaluating two refactoring strategies â€” Strategy A (extract service) vs Strategy B (extract library). You want to explore both without cross-contamination. Best approach?",
       "options": [
         {
           "label": "A",
           "text": "Explore both in the same session, asking Claude to \"forget\" the previous analysis",
           "isCorrect": false,
-          "explanation": "Models can't 'forget' — previous analysis is still in context and will influence reasoning about the second strategy."
+          "explanation": "Models can't 'forget' â€” previous analysis is still in context and will influence reasoning about the second strategy."
         },
         {
           "label": "B",
@@ -299,7 +307,8 @@
           "isCorrect": false,
           "explanation": "`/compact` reduces context but doesn't eliminate it. Strategy A's analysis will still influence Strategy B. Residual contamination."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 22,
@@ -332,7 +341,8 @@
           "isCorrect": false,
           "explanation": "Investigating all layers simultaneously when logs suggest network issues wastes resources on unlikely paths."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 23,
@@ -357,7 +367,7 @@
           "label": "C",
           "text": "Pass subagent A and B's agent IDs so C can query them directly",
           "isCorrect": false,
-          "explanation": "Violates hub-and-spoke — subagents shouldn't communicate directly. All inter-agent communication routes through the coordinator."
+          "explanation": "Violates hub-and-spoke â€” subagents shouldn't communicate directly. All inter-agent communication routes through the coordinator."
         },
         {
           "label": "D",
@@ -365,7 +375,8 @@
           "isCorrect": false,
           "explanation": "`inherit_context: true` is fabricated. Subagents do NOT automatically inherit parent context."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 24,
@@ -398,14 +409,15 @@
           "isCorrect": false,
           "explanation": "The coordinator IS the classification layer. Adding a separate one is redundant and adds latency."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 25,
       "domain": "Tool Design & MCP Integration",
       "domainShort": "D2",
       "isOfficial": false,
-      "question": "Your agent has `analyze_content`, `analyze_document`, and `review_document` — three similar tools frequently misrouted. What's the best improvement?",
+      "question": "Your agent has `analyze_content`, `analyze_document`, and `review_document` â€” three similar tools frequently misrouted. What's the best improvement?",
       "options": [
         {
           "label": "A",
@@ -431,7 +443,8 @@
           "isCorrect": false,
           "explanation": "Super-tool hides routing decision inside the tool's implementation. Makes scope vague."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 26,
@@ -464,7 +477,8 @@
           "isCorrect": false,
           "explanation": "Human-readable but lacks structured metadata for programmatic recovery. Agent can't easily determine retryability."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 27,
@@ -481,7 +495,7 @@
         },
         {
           "label": "B",
-          "text": "Split into specialized subagents with 4–5 tools each, coordinated by a hub agent",
+          "text": "Split into specialized subagents with 4â€“5 tools each, coordinated by a hub agent",
           "isCorrect": true,
           "explanation": "Restricting each subagent to 4-5 relevant tools dramatically reduces decision complexity. Addresses the >5 tools anti-pattern."
         },
@@ -497,7 +511,8 @@
           "isCorrect": false,
           "explanation": "Forced selection eliminates the model's ability to choose the right tool. Would always call the same tool regardless of context."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 28,
@@ -530,7 +545,8 @@
           "isCorrect": false,
           "explanation": "Shared tokens via messaging is insecure. Individual tokens with env var expansion is more secure."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 29,
@@ -563,7 +579,8 @@
           "isCorrect": false,
           "explanation": "Works as a workaround, but with `auto` the model might return text instead of calling the tool. Forced selection is more reliable."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 30,
@@ -582,7 +599,7 @@
           "label": "B",
           "text": "Grep across the entire codebase for the import statement",
           "isCorrect": false,
-          "explanation": "Too broad — might match the import in non-test files. Scoping to test files first is more precise."
+          "explanation": "Too broad â€” might match the import in non-test files. Scoping to test files first is more precise."
         },
         {
           "label": "C",
@@ -596,7 +613,8 @@
           "isCorrect": false,
           "explanation": "Built-in tools (Glob, Grep) are preferred over Bash equivalents. BUILT-IN > CUSTOM."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 31,
@@ -629,7 +647,8 @@
           "isCorrect": false,
           "explanation": "Arbitrary restriction. May exclude relevant older issues. Doesn't address the fundamental exploratory overhead."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 32,
@@ -662,7 +681,8 @@
           "isCorrect": false,
           "explanation": "Prompt instructions are fallback, not primary fix. Fix the tool, not the prompt."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 33,
@@ -691,11 +711,12 @@
         },
         {
           "label": "D",
-          "text": "Use both — community for basic, custom for advanced",
+          "text": "Use both â€” community for basic, custom for advanced",
           "isCorrect": false,
           "explanation": "Two servers for the same service creates confusion and double maintenance."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 34,
@@ -712,7 +733,7 @@
         },
         {
           "label": "B",
-          "text": "The coding standards are in user-level config (`~/.claude/CLAUDE.md`), not shared via version control — they should be project-level",
+          "text": "The coding standards are in user-level config (`~/.claude/CLAUDE.md`), not shared via version control â€” they should be project-level",
           "isCorrect": true,
           "explanation": "`~/.claude/CLAUDE.md` is user-level, not version-controlled. Team standards should be in project-level config (`.claude/CLAUDE.md` or root `CLAUDE.md`)."
         },
@@ -728,7 +749,8 @@
           "isCorrect": false,
           "explanation": "Fabricated technical detail. Claude Code reads configuration files on each session."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 35,
@@ -759,9 +781,10 @@
           "label": "D",
           "text": "Create a skill in `.claude/skills/terraform/`",
           "isCorrect": false,
-          "explanation": "Skills require manual invocation — wrong for always-on conventions that should load automatically."
+          "explanation": "Skills require manual invocation â€” wrong for always-on conventions that should load automatically."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 36,
@@ -794,7 +817,8 @@
           "isCorrect": false,
           "explanation": "Fabricated option. The correct way to isolate verbose output is `context: fork`."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 37,
@@ -827,7 +851,8 @@
           "isCorrect": false,
           "explanation": "CLAUDE.md is for instructions and context, not command definitions."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 38,
@@ -860,7 +885,8 @@
           "isCorrect": false,
           "explanation": "Scope is already stated as clear. Unnecessary overhead."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 39,
@@ -873,11 +899,11 @@
           "label": "A",
           "text": "Rephrase more clearly: \"Always format dates as YYYY-MM-DD\"",
           "isCorrect": false,
-          "explanation": "Already tried prose instructions — they produce inconsistent results. Same approach, same result."
+          "explanation": "Already tried prose instructions â€” they produce inconsistent results. Same approach, same result."
         },
         {
           "label": "B",
-          "text": "Provide 2–3 concrete input/output examples showing the expected ISO format",
+          "text": "Provide 2â€“3 concrete input/output examples showing the expected ISO format",
           "isCorrect": true,
           "explanation": "Concrete input/output examples are the most effective way to communicate expected transformations when prose descriptions produce inconsistent results."
         },
@@ -893,7 +919,8 @@
           "isCorrect": false,
           "explanation": "The issue is instruction clarity, not model capability. A stronger model with the same ambiguous instructions may produce the same inconsistency."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 40,
@@ -926,7 +953,8 @@
           "isCorrect": false,
           "explanation": "Time delays don't reset context. Same biased context persists regardless of delays."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 41,
@@ -959,7 +987,8 @@
           "isCorrect": false,
           "explanation": "Prompt-based 'respond in JSON' doesn't guarantee valid JSON or schema compliance."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 42,
@@ -992,7 +1021,8 @@
           "isCorrect": false,
           "explanation": "Claude Code uses CLAUDE.md markdown files, not JSON configs."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 43,
@@ -1025,7 +1055,8 @@
           "isCorrect": false,
           "explanation": "Not a valid skill frontmatter option."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 44,
@@ -1056,9 +1087,10 @@
           "label": "D",
           "text": "Train a separate classifier to filter false positives",
           "isCorrect": false,
-          "explanation": "Over-engineered. Fix the prompt first — explicit criteria address root cause with zero infrastructure. COST-AWARE > BRUTE-FORCE."
+          "explanation": "Over-engineered. Fix the prompt first â€” explicit criteria address root cause with zero infrastructure. COST-AWARE > BRUTE-FORCE."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 45,
@@ -1075,7 +1107,7 @@
         },
         {
           "label": "B",
-          "text": "Provide 2–4 few-shot examples showing extraction from varied formats, including handling of missing/unclear info",
+          "text": "Provide 2â€“4 few-shot examples showing extraction from varied formats, including handling of missing/unclear info",
           "isCorrect": true,
           "explanation": "Few-shot examples showing how to handle ambiguity (returning null for unclear fields) directly address hallucination. The model learns 'when uncertain, leave blank.'"
         },
@@ -1083,7 +1115,7 @@
           "label": "C",
           "text": "Increase max_tokens so the model doesn't truncate",
           "isCorrect": false,
-          "explanation": "Truncation isn't the issue — fabrication is. The model isn't running out of space."
+          "explanation": "Truncation isn't the issue â€” fabrication is. The model isn't running out of space."
         },
         {
           "label": "D",
@@ -1091,7 +1123,8 @@
           "isCorrect": false,
           "explanation": "OCR handles text recognition from images. The problem is extraction logic during structured extraction, not OCR."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 46,
@@ -1116,7 +1149,7 @@
           "label": "C",
           "text": "Use `tool_use` with a JSON schema and post-validate with `strict: true`",
           "isCorrect": false,
-          "explanation": "`strict: true` eliminates syntax errors at the API level — separate post-validation isn't needed for syntax."
+          "explanation": "`strict: true` eliminates syntax errors at the API level â€” separate post-validation isn't needed for syntax."
         },
         {
           "label": "D",
@@ -1124,7 +1157,8 @@
           "isCorrect": false,
           "explanation": "Retry-based approach adds latency and doesn't guarantee semantic correctness. `tool_use` solves this more elegantly."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 47,
@@ -1149,15 +1183,16 @@
           "label": "C",
           "text": "Required field with instructions to \"leave blank if not found\"",
           "isCorrect": false,
-          "explanation": "'Leave blank' is ambiguous — empty string? null? omitted? Schema-level nullability is more precise."
+          "explanation": "'Leave blank' is ambiguous â€” empty string? null? omitted? Schema-level nullability is more precise."
         },
         {
           "label": "D",
-          "text": "Two separate schemas — one with PO, one without",
+          "text": "Two separate schemas â€” one with PO, one without",
           "isCorrect": false,
           "explanation": "Over-engineered. Doubles the config surface. A single schema with nullable field handles both cases."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 48,
@@ -1176,13 +1211,13 @@
           "label": "B",
           "text": "The model is not powerful enough",
           "isCorrect": false,
-          "explanation": "Model correctly extracted what's there — the document itself is wrong. Not a capability issue."
+          "explanation": "Model correctly extracted what's there â€” the document itself is wrong. Not a capability issue."
         },
         {
           "label": "C",
-          "text": "Retries are ineffective when source data is wrong — needs human review routing",
+          "text": "Retries are ineffective when source data is wrong â€” needs human review routing",
           "isCorrect": true,
-          "explanation": "Retries fix format/structural errors, not source data errors. This requires human review — the system should flag it rather than retrying indefinitely."
+          "explanation": "Retries fix format/structural errors, not source data errors. This requires human review â€” the system should flag it rather than retrying indefinitely."
         },
         {
           "label": "D",
@@ -1190,14 +1225,15 @@
           "isCorrect": false,
           "explanation": "Loosening validation might hide real extraction errors. The validation caught a genuine document issue."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 49,
       "domain": "Prompt Engineering & Structured Output",
       "domainShort": "D4",
       "isOfficial": false,
-      "question": "A 20-file code review produces inconsistent findings — same pattern flagged in file 3 but approved in file 15. What architectural pattern?",
+      "question": "A 20-file code review produces inconsistent findings â€” same pattern flagged in file 3 but approved in file 15. What architectural pattern?",
       "options": [
         {
           "label": "A",
@@ -1223,7 +1259,8 @@
           "isCorrect": false,
           "explanation": "File ordering doesn't address attention dilution. Cosmetic change."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 50,
@@ -1256,7 +1293,8 @@
           "isCorrect": false,
           "explanation": "No automatic retries. You must handle failures by resubmitting failed documents via `custom_id`."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 51,
@@ -1269,7 +1307,7 @@
           "label": "A",
           "text": "A confidence score (1-10) per finding",
           "isCorrect": false,
-          "explanation": "Model confidence is poorly calibrated — often confident about false positives."
+          "explanation": "Model confidence is poorly calibrated â€” often confident about false positives."
         },
         {
           "label": "B",
@@ -1289,7 +1327,8 @@
           "isCorrect": false,
           "explanation": "Helps developers understand why flagged but doesn't enable aggregate dismiss pattern analysis."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 52,
@@ -1322,7 +1361,8 @@
           "isCorrect": false,
           "explanation": "Arbitrary constraint that doesn't improve retention. Complex issues need many turns."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 53,
@@ -1347,7 +1387,7 @@
           "label": "C",
           "text": "Randomly shuffle source order each time",
           "isCorrect": false,
-          "explanation": "Randomizes which sources are omitted — non-deterministic behavior. Doesn't solve the problem."
+          "explanation": "Randomizes which sources are omitted â€” non-deterministic behavior. Doesn't solve the problem."
         },
         {
           "label": "D",
@@ -1355,7 +1395,8 @@
           "isCorrect": false,
           "explanation": "Prevents cross-source synthesis. Extremely slow for 20 sources."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 54,
@@ -1386,9 +1427,10 @@
           "label": "D",
           "text": "Sentiment analysis detects \"very negative\" tone",
           "isCorrect": false,
-          "explanation": "Sentiment-based escalation is an explicit anti-pattern. Negative tone ≠ needs human."
+          "explanation": "Sentiment-based escalation is an explicit anti-pattern. Negative tone â‰  needs human."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 55,
@@ -1421,14 +1463,15 @@
           "isCorrect": false,
           "explanation": "Requires backend changes, not always feasible for third-party tools. Trimming in orchestration is more universal."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 56,
       "domain": "Context Management & Reliability",
       "domainShort": "D5",
       "isOfficial": false,
-      "question": "Deep codebase investigation over many turns — agent starts contradicting earlier findings. What technique helps?",
+      "question": "Deep codebase investigation over many turns â€” agent starts contradicting earlier findings. What technique helps?",
       "options": [
         {
           "label": "A",
@@ -1454,7 +1497,8 @@
           "isCorrect": false,
           "explanation": "`--resume` continues the same degraded context. Doesn't reduce or create external persistence."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 57,
@@ -1487,7 +1531,8 @@
           "isCorrect": false,
           "explanation": "Subjective, not data-driven. Doesn't substitute for quantitative analysis."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 58,
@@ -1520,7 +1565,8 @@
           "isCorrect": false,
           "explanation": "Information loss. Conflicting data from credible sources is important information, not noise."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 59,
@@ -1553,7 +1599,8 @@
           "isCorrect": false,
           "explanation": "More tools don't make an inherently complex task faster. May worsen tool selection accuracy."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 60,
@@ -1564,7 +1611,7 @@
       "options": [
         {
           "label": "A",
-          "text": "Prompt chaining — each step feeds into the next with defined inputs/outputs",
+          "text": "Prompt chaining â€” each step feeds into the next with defined inputs/outputs",
           "isCorrect": true,
           "explanation": "Prompt chaining is ideal when steps are sequential, deterministic, and each output feeds the next input. This pipeline has clear dependencies."
         },
@@ -1572,7 +1619,7 @@
           "label": "B",
           "text": "Hub-and-spoke with a coordinator delegating to extraction, classification, and structuring subagents",
           "isCorrect": false,
-          "explanation": "Hub-and-spoke is for tasks that can be parallelized. Here, Step 3 depends on Step 2 which depends on Step 1 — inherently sequential."
+          "explanation": "Hub-and-spoke is for tasks that can be parallelized. Here, Step 3 depends on Step 2 which depends on Step 1 â€” inherently sequential."
         },
         {
           "label": "C",
@@ -1586,7 +1633,8 @@
           "isCorrect": false,
           "explanation": "Combining extraction, classification, and structured extraction in one prompt creates attention dilution and blurs responsibilities."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 61,
@@ -1619,7 +1667,8 @@
           "isCorrect": false,
           "explanation": "NL parsing for control flow is an explicit anti-pattern. The structured stop_reason field exists for this."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 62,
@@ -1652,14 +1701,15 @@
           "isCorrect": false,
           "explanation": "Model selection for identification purposes is wasteful and unreliable. Models don't produce distinctly identifiable output."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 63,
       "domain": "Agentic Architecture & Orchestration",
       "domainShort": "D1",
       "isOfficial": false,
-      "question": "Your agent's agentic loop occasionally enters an infinite cycle — calling the same tool with the same parameters repeatedly. Best safeguard?",
+      "question": "Your agent's agentic loop occasionally enters an infinite cycle â€” calling the same tool with the same parameters repeatedly. Best safeguard?",
       "options": [
         {
           "label": "A",
@@ -1685,7 +1735,8 @@
           "isCorrect": false,
           "explanation": "Randomness might break the exact pattern but doesn't reliably prevent loops and may cause other issues."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 64,
@@ -1698,7 +1749,7 @@
           "label": "A",
           "text": "The agent is hallucinating IDs",
           "isCorrect": false,
-          "explanation": "The agent isn't making up IDs — it's passing a name TO the ID parameter. The issue is tool descriptions, not hallucination."
+          "explanation": "The agent isn't making up IDs â€” it's passing a name TO the ID parameter. The issue is tool descriptions, not hallucination."
         },
         {
           "label": "B",
@@ -1708,7 +1759,7 @@
         },
         {
           "label": "C",
-          "text": "The parameter name 'id' is confusing — rename to 'user_id'",
+          "text": "The parameter name 'id' is confusing â€” rename to 'user_id'",
           "isCorrect": false,
           "explanation": "Renaming helps marginally but descriptions are the primary signal. Without boundary descriptions, the same confusion recurs."
         },
@@ -1718,7 +1769,8 @@
           "isCorrect": false,
           "explanation": "Eliminates the direct lookup which is more efficient when you have the ID. Throwing away functionality isn't ideal."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 65,
@@ -1751,7 +1803,8 @@
           "isCorrect": false,
           "explanation": "Adds unnecessary tool calls for every value. Including formatted values in the original response is more efficient."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 66,
@@ -1776,7 +1829,7 @@
           "label": "C",
           "text": "Lower temperature to reduce unexpected behavior",
           "isCorrect": false,
-          "explanation": "Temperature doesn't prevent tool misuse. The model decided to call the tool — temperature affects randomness, not tool selection logic."
+          "explanation": "Temperature doesn't prevent tool misuse. The model decided to call the tool â€” temperature affects randomness, not tool selection logic."
         },
         {
           "label": "D",
@@ -1784,7 +1837,8 @@
           "isCorrect": false,
           "explanation": "May be needed for legitimate operations. The fix is gating, not removal."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 67,
@@ -1815,9 +1869,10 @@
           "label": "D",
           "text": "Expand the enum to include all casing variations",
           "isCorrect": false,
-          "explanation": "Permissive schemas don't solve the problem — they push complexity to downstream consumers."
+          "explanation": "Permissive schemas don't solve the problem â€” they push complexity to downstream consumers."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 68,
@@ -1848,9 +1903,10 @@
           "label": "D",
           "text": "Expose one tool that searches and returns full page content in one call",
           "isCorrect": false,
-          "explanation": "Returning full content from a search is wasteful — search results should be summaries with the option to read full content."
+          "explanation": "Returning full content from a search is wasteful â€” search results should be summaries with the option to read full content."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 69,
@@ -1861,29 +1917,30 @@
       "options": [
         {
           "label": "A",
-          "text": "MCP Tool — define a code-review tool",
+          "text": "MCP Tool â€” define a code-review tool",
           "isCorrect": false,
           "explanation": "Tools execute actions. A template is static content, not an action to execute."
         },
         {
           "label": "B",
-          "text": "MCP Resource — expose the template as a readable resource",
+          "text": "MCP Resource â€” expose the template as a readable resource",
           "isCorrect": false,
           "explanation": "Resources expose data/content, but templates with placeholders that guide Claude's behavior are prompts, not resources."
         },
         {
           "label": "C",
-          "text": "MCP Prompt — expose the template as a parameterized prompt",
+          "text": "MCP Prompt â€” expose the template as a parameterized prompt",
           "isCorrect": true,
           "explanation": "MCP Prompts are specifically designed for reusable prompt templates with parameters. A code review template with placeholders maps directly to this primitive."
         },
         {
           "label": "D",
-          "text": "MCP Sampling — use server-initiated model invocation",
+          "text": "MCP Sampling â€” use server-initiated model invocation",
           "isCorrect": false,
           "explanation": "Sampling lets the server ask Claude to generate content. A template doesn't need server-initiated generation."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 70,
@@ -1916,7 +1973,8 @@
           "isCorrect": false,
           "explanation": "Loses TypeScript guidance for the main codebase to fix one edge case."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 71,
@@ -1949,7 +2007,8 @@
           "isCorrect": false,
           "explanation": "Fabricated configuration option. Does not exist."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 72,
@@ -1982,7 +2041,8 @@
           "isCorrect": false,
           "explanation": "Fabricated flag. Does not exist."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 73,
@@ -1993,7 +2053,7 @@
       "options": [
         {
           "label": "A",
-          "text": "Project root first, then user-level — user overrides project",
+          "text": "Project root first, then user-level â€” user overrides project",
           "isCorrect": false,
           "explanation": "The hierarchy goes from general (user) to specific (project to subdirectory). Each level adds, doesn't override."
         },
@@ -2001,7 +2061,7 @@
           "label": "B",
           "text": "User-level (`~/.claude/`) → project root → subdirectory. Each level adds context; nothing is overridden",
           "isCorrect": true,
-          "explanation": "CLAUDE.md hierarchy loads from broadest to narrowest scope. All levels are additive — instructions from all levels are available simultaneously."
+          "explanation": "CLAUDE.md hierarchy loads from broadest to narrowest scope. All levels are additive â€” instructions from all levels are available simultaneously."
         },
         {
           "label": "C",
@@ -2015,7 +2075,8 @@
           "isCorrect": false,
           "explanation": "Fabricated behavior. The hierarchy is scope-based (user → project → subdirectory)."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 74,
@@ -2048,7 +2109,8 @@
           "isCorrect": false,
           "explanation": "Low temperature improves determinism but doesn't standardize review structure or criteria."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 75,
@@ -2081,7 +2143,8 @@
           "isCorrect": false,
           "explanation": "Over-engineered when the prompt itself hasn't been optimized. Fix the prompt first. COST-AWARE > BRUTE-FORCE."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 76,
@@ -2098,7 +2161,7 @@
         },
         {
           "label": "B",
-          "text": "Attention dilution over long input — the model processes earlier content more reliably than later content",
+          "text": "Attention dilution over long input â€” the model processes earlier content more reliably than later content",
           "isCorrect": true,
           "explanation": "'Lost in the middle' effect: models process beginning and end of long inputs more reliably. Pages 30-60 of a 90-page document are in the low-attention zone."
         },
@@ -2114,7 +2177,8 @@
           "isCorrect": false,
           "explanation": "Contracts typically have boilerplate in later sections. The pattern points to positional attention, not content complexity."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 77,
@@ -2127,7 +2191,7 @@
           "label": "A",
           "text": "All 15 fields required, with 'N/A' as default for missing ones",
           "isCorrect": false,
-          "explanation": "Required fields with 'N/A' pressure the model to produce values. Downstream must handle 'N/A' as a special case — messy."
+          "explanation": "Required fields with 'N/A' pressure the model to produce values. Downstream must handle 'N/A' as a special case â€” messy."
         },
         {
           "label": "B",
@@ -2137,7 +2201,7 @@
         },
         {
           "label": "C",
-          "text": "Two separate schemas — one with 5 fields, one with 15",
+          "text": "Two separate schemas â€” one with 5 fields, one with 15",
           "isCorrect": false,
           "explanation": "Requires knowing upfront which schema to use before extraction. Doubles maintenance."
         },
@@ -2147,7 +2211,8 @@
           "isCorrect": false,
           "explanation": "All-optional means even the 5 always-present fields might not be extracted. Too permissive."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 78,
@@ -2180,7 +2245,8 @@
           "isCorrect": false,
           "explanation": "Extremely over-engineered and expensive. 12x the API calls for rule application."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 79,
@@ -2191,13 +2257,13 @@
       "options": [
         {
           "label": "A",
-          "text": "`tool_choice: \"auto\"` — the model decides",
+          "text": "`tool_choice: \"auto\"` â€” the model decides",
           "isCorrect": false,
           "explanation": "`auto` allows the model to return text without calling any tool. Doesn't enforce tool attempt."
         },
         {
           "label": "B",
-          "text": "`tool_choice: \"any\"` — the model must call a tool",
+          "text": "`tool_choice: \"any\"` â€” the model must call a tool",
           "isCorrect": true,
           "explanation": "`any` forces the model to call at least one tool. If the tool can't help, you handle that in the tool response and retry with auto."
         },
@@ -2209,11 +2275,12 @@
         },
         {
           "label": "D",
-          "text": "`tool_choice: \"required\"` — tools are mandatory",
+          "text": "`tool_choice: \"required\"` â€” tools are mandatory",
           "isCorrect": false,
           "explanation": "`required` is not a valid tool_choice value. The valid values are `auto`, `any`, and `tool` (with name)."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 80,
@@ -2224,29 +2291,30 @@
       "options": [
         {
           "label": "A",
-          "text": "The model finished but the response was cut — increase max_tokens",
+          "text": "The model finished but the response was cut â€” increase max_tokens",
           "isCorrect": false,
           "explanation": "Increasing max_tokens helps if the model needs more space, but you should also handle truncation in the agentic loop by continuing the conversation."
         },
         {
           "label": "B",
-          "text": "The output hit the max_tokens limit — send a continuation request with the existing conversation to get the rest",
+          "text": "The output hit the max_tokens limit â€” send a continuation request with the existing conversation to get the rest",
           "isCorrect": true,
           "explanation": "`max_tokens` truncation means the response was cut short. In an agentic loop, send the conversation back to get the continuation. Always handle this stop_reason."
         },
         {
           "label": "C",
-          "text": "This is an error — retry the same request",
+          "text": "This is an error â€” retry the same request",
           "isCorrect": false,
           "explanation": "Not an error. `max_tokens` is a normal stop_reason. Retrying produces the same truncation."
         },
         {
           "label": "D",
-          "text": "The model decided to stop — treat as complete",
+          "text": "The model decided to stop â€” treat as complete",
           "isCorrect": false,
           "explanation": "`max_tokens` means forced stop, not voluntary. `end_turn` means the model chose to stop."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 81,
@@ -2279,7 +2347,8 @@
           "isCorrect": false,
           "explanation": "Claude handles multiple languages natively. A separate model is unnecessary overhead."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 82,
@@ -2312,7 +2381,8 @@
           "isCorrect": false,
           "explanation": "Extended thinking uses tokens for reasoning within the existing context window. It doesn't expand the window."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 83,
@@ -2329,7 +2399,7 @@
         },
         {
           "label": "B",
-          "text": "Implement progressive tool result summarization — keep recent results in full, summarize older ones to key facts",
+          "text": "Implement progressive tool result summarization â€” keep recent results in full, summarize older ones to key facts",
           "isCorrect": true,
           "explanation": "Progressive summarization keeps recent results detailed (for active reasoning) while compressing older results to key facts. Directly addresses accumulation bloat."
         },
@@ -2345,7 +2415,8 @@
           "isCorrect": false,
           "explanation": "The model may need to reference earlier results for reasoning. Complete removal loses context."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 84,
@@ -2378,7 +2449,8 @@
           "isCorrect": false,
           "explanation": "Even larger windows suffer from attention dilution on 200-page documents. Chunking is more reliable."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 85,
@@ -2411,7 +2483,8 @@
           "isCorrect": false,
           "explanation": "max_tokens controls output length, not context window. Doesn't help with context limit."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 86,
@@ -2424,7 +2497,7 @@
           "label": "A",
           "text": "Sample 5% of daily extractions for human review and track accuracy metrics per document type and field",
           "isCorrect": true,
-          "explanation": "Stratified sampling with per-type/per-field metrics detects drift in specific segments. 5% at 1000 docs = 50 reviews/day — manageable human workload."
+          "explanation": "Stratified sampling with per-type/per-field metrics detects drift in specific segments. 5% at 1000 docs = 50 reviews/day â€” manageable human workload."
         },
         {
           "label": "B",
@@ -2444,7 +2517,8 @@
           "isCorrect": false,
           "explanation": "Same model with same input produces similar results. Doesn't detect systematic errors."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 87,
@@ -2455,13 +2529,13 @@
       "options": [
         {
           "label": "A",
-          "text": "No — 3 minutes is recent enough for any operation",
+          "text": "No â€” 3 minutes is recent enough for any operation",
           "isCorrect": false,
           "explanation": "For critical decisions, especially financial operations, stale data can lead to incorrect actions."
         },
         {
           "label": "B",
-          "text": "Yes — for critical decisions, re-verify state immediately before acting to prevent time-of-check/time-of-use issues",
+          "text": "Yes â€” for critical decisions, re-verify state immediately before acting to prevent time-of-check/time-of-use issues",
           "isCorrect": true,
           "explanation": "TOCTOU (time-of-check/time-of-use): account status may have changed since the last check. Critical decisions require fresh verification."
         },
@@ -2477,7 +2551,8 @@
           "isCorrect": false,
           "explanation": "User may not know about backend status changes. Relying on user awareness is unreliable."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 88,
@@ -2510,7 +2585,8 @@
           "isCorrect": false,
           "explanation": "Retryable errors should be handled automatically. User intervention for transient failures is poor UX."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 89,
@@ -2543,7 +2619,8 @@
           "isCorrect": false,
           "explanation": "Random selection may exclude the most relevant findings. Balance should be intentional, not random."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 90,
@@ -2556,11 +2633,11 @@
           "label": "A",
           "text": "Model hallucination",
           "isCorrect": false,
-          "explanation": "Not hallucination — the data IS in context from the previous claim. The model correctly recalls it but applies it to the wrong claim."
+          "explanation": "Not hallucination â€” the data IS in context from the previous claim. The model correctly recalls it but applies it to the wrong claim."
         },
         {
           "label": "B",
-          "text": "Context cross-contamination — previous claim details persist in the conversation and bleed into the new claim's processing",
+          "text": "Context cross-contamination â€” previous claim details persist in the conversation and bleed into the new claim's processing",
           "isCorrect": true,
           "explanation": "Classic context cross-contamination. Previous claim facts are still in conversation history and get applied to the new claim. Each claim needs isolated context."
         },
@@ -2576,7 +2653,8 @@
           "isCorrect": false,
           "explanation": "Prompt instructions can't reliably prevent the model from referencing information that's present in context."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 91,
@@ -2593,7 +2671,7 @@
         },
         {
           "label": "B",
-          "text": "The agent has 10 tools — well above the 4-5 tool limit for reliable selection",
+          "text": "The agent has 10 tools â€” well above the 4-5 tool limit for reliable selection",
           "isCorrect": true,
           "explanation": "10 tools is double the recommended maximum. Selection accuracy drops sharply above 5. Decompose into subagents."
         },
@@ -2609,7 +2687,8 @@
           "isCorrect": false,
           "explanation": "More examples add tokens but don't reduce the fundamental selection complexity of 10 tools."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 92,
@@ -2642,7 +2721,8 @@
           "isCorrect": false,
           "explanation": "Disguising errors as success prevents proper error handling in the orchestration layer."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 93,
@@ -2667,7 +2747,7 @@
           "label": "C",
           "text": "Run 3 reviews and take the longest one",
           "isCorrect": false,
-          "explanation": "Longest ≠ best. 3x cost for an arbitrary selection criteria."
+          "explanation": "Longest â‰  best. 3x cost for an arbitrary selection criteria."
         },
         {
           "label": "D",
@@ -2675,7 +2755,8 @@
           "isCorrect": false,
           "explanation": "Fabricated flag. Does not exist in Claude Code."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 94,
@@ -2708,7 +2789,8 @@
           "isCorrect": false,
           "explanation": "max_tokens truncation cuts off mid-thought rather than producing concise content. Produces incomplete, not concise, output."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 95,
@@ -2719,7 +2801,7 @@
       "options": [
         {
           "label": "A",
-          "text": "The model hit an error — retry the request",
+          "text": "The model hit an error â€” retry the request",
           "isCorrect": false,
           "explanation": "Not an error. `stop_sequence` is a normal stop reason."
         },
@@ -2731,7 +2813,7 @@
         },
         {
           "label": "C",
-          "text": "A predefined stop sequence was encountered in the output — handle according to what that stop sequence represents in your application",
+          "text": "A predefined stop sequence was encountered in the output â€” handle according to what that stop sequence represents in your application",
           "isCorrect": true,
           "explanation": "`stop_sequence` means the model's output contained one of the predefined stop strings. Application-specific handling depends on what the stop sequence represents."
         },
@@ -2741,7 +2823,8 @@
           "isCorrect": false,
           "explanation": "Context window limits produce `max_tokens`, not `stop_sequence`."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 96,
@@ -2754,7 +2837,7 @@
           "label": "A",
           "text": "Rewrite the system prompt with stronger wording",
           "isCorrect": false,
-          "explanation": "Stronger wording is still probabilistic. The system prompt already contains the rule — the model already 'knows' it."
+          "explanation": "Stronger wording is still probabilistic. The system prompt already contains the rule â€” the model already 'knows' it."
         },
         {
           "label": "B",
@@ -2774,7 +2857,8 @@
           "isCorrect": false,
           "explanation": "Same-session self-verification. The agent that decided to accept the return is unlikely to contradict itself."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 97,
@@ -2785,29 +2869,30 @@
       "options": [
         {
           "label": "A",
-          "text": "MCP Tool — the server executes a tool to generate the message",
+          "text": "MCP Tool â€” the server executes a tool to generate the message",
           "isCorrect": false,
-          "explanation": "Tools are called BY the model. Sampling is the reverse — the SERVER asks the model to generate something."
+          "explanation": "Tools are called BY the model. Sampling is the reverse â€” the SERVER asks the model to generate something."
         },
         {
           "label": "B",
-          "text": "MCP Sampling — the server requests the model to generate content on its behalf",
+          "text": "MCP Sampling â€” the server requests the model to generate content on its behalf",
           "isCorrect": true,
           "explanation": "Sampling allows MCP servers to request LLM completions through the client. The server provides context (staged changes) and gets back generated content (commit message)."
         },
         {
           "label": "C",
-          "text": "MCP Resource — the commit message is exposed as a resource",
+          "text": "MCP Resource â€” the commit message is exposed as a resource",
           "isCorrect": false,
           "explanation": "Resources expose existing content. A commit message to be generated doesn't exist yet."
         },
         {
           "label": "D",
-          "text": "MCP Prompt — a prompt template generates the message",
+          "text": "MCP Prompt â€” a prompt template generates the message",
           "isCorrect": false,
-          "explanation": "Prompts are templates the USER selects. Sampling is server-initiated model invocation — the server decides when to generate."
+          "explanation": "Prompts are templates the USER selects. Sampling is server-initiated model invocation â€” the server decides when to generate."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 98,
@@ -2840,7 +2925,8 @@
           "isCorrect": false,
           "explanation": "Separate projects break the monorepo benefit of shared code and cross-team collaboration."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 99,
@@ -2851,7 +2937,7 @@
       "options": [
         {
           "label": "A",
-          "text": "Continue retrying — it will eventually get it right",
+          "text": "Continue retrying â€” it will eventually get it right",
           "isCorrect": false,
           "explanation": "Non-converging errors suggest the task is beyond the model's capability for this input. More retries waste resources."
         },
@@ -2873,7 +2959,8 @@
           "isCorrect": false,
           "explanation": "Mid-retry model switching adds complexity. Better to route to human review for this specific case."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 100,
@@ -2906,7 +2993,8 @@
           "isCorrect": false,
           "explanation": "No model is immune to prompt injection via instructions alone. Application-layer defenses are needed."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 101,
@@ -2939,7 +3027,8 @@
           "isCorrect": false,
           "explanation": "Over-engineered. Summaries in context are simpler and faster than database round-trips."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 102,
@@ -2972,7 +3061,8 @@
           "isCorrect": false,
           "explanation": "Committed .env files expose credentials in version control history. Use .env locally + .gitignore, reference via env vars in config."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 103,
@@ -2997,15 +3087,16 @@
           "label": "C",
           "text": "Increase extended thinking to make Claude more confident",
           "isCorrect": false,
-          "explanation": "More thinking doesn't make wrong answers right. Confidence ≠ correctness."
+          "explanation": "More thinking doesn't make wrong answers right. Confidence â‰  correctness."
         },
         {
           "label": "D",
-          "text": "Accept the fix — Claude is usually right",
+          "text": "Accept the fix â€” Claude is usually right",
           "isCorrect": false,
           "explanation": "Blind trust in model output is dangerous for production code. Always verify."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 104,
@@ -3038,7 +3129,8 @@
           "isCorrect": false,
           "explanation": "Implicit learning from examples is unreliable. Explicit convention specification is more reliable. EXPLICIT > IMPLICIT."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     },
     {
       "id": 105,
@@ -3055,7 +3147,7 @@
         },
         {
           "label": "B",
-          "text": "Input data distribution has shifted — new document types, formats, or edge cases the system wasn't designed for",
+          "text": "Input data distribution has shifted â€” new document types, formats, or edge cases the system wasn't designed for",
           "isCorrect": true,
           "explanation": "Data drift is the most common cause of accuracy degradation without code changes. New customer types, updated document formats, or seasonal variations."
         },
@@ -3071,7 +3163,11 @@
           "isCorrect": false,
           "explanation": "Context windows are model parameters, not dynamic values. They don't change after deployment."
         }
-      ]
+      ],
+      "source": "claudeprepareexam"
     }
-  ]
+  ],
+  "disclaimer": "AI-generated practice questions. Not affiliated with Anthropic. Used for educational purposes only.",
+  "isDefault": false,
+  "sourceUrl": "https://claudeprepareexam.com"
 }

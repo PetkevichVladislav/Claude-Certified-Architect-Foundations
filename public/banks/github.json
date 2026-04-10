@@ -9,7 +9,7 @@
       "domain": "Agentic Architecture & Orchestration",
       "domainShort": "D1",
       "scenario": "Customer Support Resolution Agent",
-      "isOfficial": true,
+      "isOfficial": false,
       "question": "Production data shows that in 12% of cases, your agent skips `get_customer` entirely and calls `lookup_order` using only the customer's stated name, occasionally leading to misidentified accounts and incorrect refunds. What change would most effectively address this reliability issue?",
       "options": [
         {
@@ -22,7 +22,7 @@
           "label": "B",
           "text": "Enhance the system prompt to state that customer verification via `get_customer` is mandatory before any order operations",
           "isCorrect": false,
-          "explanation": "Prompt instructions are probabilistic — the 12% skip rate exists despite the model generally knowing the right sequence. When errors have financial consequences, probabilistic compliance is unacceptable."
+          "explanation": "Prompt instructions are probabilistic â€” the 12% skip rate exists despite the model generally knowing the right sequence. When errors have financial consequences, probabilistic compliance is unacceptable."
         },
         {
           "label": "C",
@@ -34,23 +34,23 @@
           "label": "D",
           "text": "Implement a routing classifier that analyzes each request and enables only the subset of tools appropriate for that request type",
           "isCorrect": false,
-          "explanation": "A routing classifier addresses which tools are available, not what order they must be called in. Solves tool selection, not tool sequencing — which is the actual problem."
+          "explanation": "A routing classifier addresses which tools are available, not what order they must be called in. Solves tool selection, not tool sequencing â€” which is the actual problem."
         }
       ],
       "algorithmTrace": "B and C are prompt-based → anti-pattern for deterministic business rules → eliminate. D solves wrong problem. A is programmatic enforcement → CODE > PROMPTS → select A.",
-      "source": "official"
+      "source": "github"
     },
     {
       "id": 2,
       "domain": "Tool Design & MCP Integration",
       "domainShort": "D2",
       "scenario": "Customer Support Resolution Agent",
-      "isOfficial": true,
+      "isOfficial": false,
       "question": "Production logs show the agent frequently calls `get_customer` when users ask about orders (e.g., \"check my order #12345\"), instead of calling `lookup_order`. Both tools have minimal descriptions and accept similar identifier formats. What's the most effective first step to improve tool selection reliability?",
       "options": [
         {
           "label": "A",
-          "text": "Add few-shot examples to the system prompt demonstrating correct tool selection patterns, with 5–8 examples",
+          "text": "Add few-shot examples to the system prompt demonstrating correct tool selection patterns, with 5â€“8 examples",
           "isCorrect": false,
           "explanation": "Few-shot examples add token overhead without fixing the root cause: the model can't distinguish between tools because descriptions are minimal. Descriptions are the primary selection signal."
         },
@@ -70,18 +70,18 @@
           "label": "D",
           "text": "Consolidate both tools into a single `lookup_entity` tool that accepts any identifier and internally determines which backend to query",
           "isCorrect": false,
-          "explanation": "Valid architectural choice but requires backend changes. The question asks for the most effective first step — description improvement is faster and often sufficient."
+          "explanation": "Valid architectural choice but requires backend changes. The question asks for the most effective first step â€” description improvement is faster and often sufficient."
         }
       ],
       "algorithmTrace": "C = NL parsing anti-pattern → eliminate. A adds overhead without fixing root cause. D is valid but heavy for a 'first step'. B is built-in mechanism → BUILT-IN > CUSTOM → select B.",
-      "source": "official"
+      "source": "github"
     },
     {
       "id": 3,
       "domain": "Context Management & Reliability",
       "domainShort": "D5",
       "scenario": "Customer Support Resolution Agent",
-      "isOfficial": true,
+      "isOfficial": false,
       "question": "Your agent achieves 55% first-contact resolution, well below the 80% target. Logs show it escalates straightforward cases while attempting complex situations requiring policy exceptions. What's the most effective way to improve escalation calibration?",
       "options": [
         {
@@ -92,9 +92,9 @@
         },
         {
           "label": "B",
-          "text": "Have the agent self-report a confidence score (1–10) and automatically route requests to humans below a threshold",
+          "text": "Have the agent self-report a confidence score (1â€“10) and automatically route requests to humans below a threshold",
           "isCorrect": false,
-          "explanation": "LLM self-reported confidence is poorly calibrated — the agent is already incorrectly confident on hard cases. A confidence score encodes the same bad calibration numerically."
+          "explanation": "LLM self-reported confidence is poorly calibrated â€” the agent is already incorrectly confident on hard cases. A confidence score encodes the same bad calibration numerically."
         },
         {
           "label": "C",
@@ -106,18 +106,18 @@
           "label": "D",
           "text": "Implement sentiment analysis to detect customer frustration levels and automatically escalate when threshold exceeded",
           "isCorrect": false,
-          "explanation": "Sentiment-based escalation is an explicit exam anti-pattern. Sentiment doesn't correlate with case complexity — an angry customer with a standard replacement is still simple."
+          "explanation": "Sentiment-based escalation is an explicit exam anti-pattern. Sentiment doesn't correlate with case complexity â€” an angry customer with a standard replacement is still simple."
         }
       ],
       "algorithmTrace": "B = self-reported confidence → unreliable → eliminate. D = sentiment-based escalation → anti-pattern → eliminate. C = over-engineered. A = explicit criteria → EXPLICIT > IMPLICIT → select A.",
-      "source": "official"
+      "source": "github"
     },
     {
       "id": 4,
       "domain": "Claude Code Configuration & Workflows",
       "domainShort": "D3",
       "scenario": "Code Generation with Claude Code",
-      "isOfficial": true,
+      "isOfficial": false,
       "question": "You want to create a custom `/review` slash command that runs your team's standard code review checklist. This command should be available to every developer when they clone or pull the repository. Where should you create this command file?",
       "options": [
         {
@@ -145,21 +145,21 @@
           "explanation": "`.claude/config.json` with a `commands` array is a fabricated configuration mechanism that does not exist in Claude Code. Trap answer."
         }
       ],
-      "source": "official"
+      "source": "github"
     },
     {
       "id": 5,
       "domain": "Claude Code Configuration & Workflows",
       "domainShort": "D3",
       "scenario": "Code Generation with Claude Code",
-      "isOfficial": true,
+      "isOfficial": false,
       "question": "You've been assigned to restructure the team's monolithic application into microservices. This will involve changes across dozens of files and requires decisions about service boundaries. Which approach should you take?",
       "options": [
         {
           "label": "A",
           "text": "Enter plan mode to explore the codebase, understand dependencies, and design an implementation approach before making changes",
           "isCorrect": true,
-          "explanation": "Plan mode is designed for complex tasks involving large-scale changes, multiple valid approaches, and architectural decisions — exactly what monolith restructuring requires."
+          "explanation": "Plan mode is designed for complex tasks involving large-scale changes, multiple valid approaches, and architectural decisions â€” exactly what monolith restructuring requires."
         },
         {
           "label": "B",
@@ -177,17 +177,17 @@
           "label": "D",
           "text": "Begin in direct execution mode and only switch to plan mode if you encounter unexpected complexity",
           "isCorrect": false,
-          "explanation": "The complexity is already stated in the requirements — it's not something that 'might emerge later.' Ignoring obvious complexity wastes time."
+          "explanation": "The complexity is already stated in the requirements â€” it's not something that 'might emerge later.' Ignoring obvious complexity wastes time."
         }
       ],
-      "source": "official"
+      "source": "github"
     },
     {
       "id": 6,
       "domain": "Claude Code Configuration & Workflows",
       "domainShort": "D3",
       "scenario": "Code Generation with Claude Code",
-      "isOfficial": true,
+      "isOfficial": false,
       "question": "Your codebase has test files spread throughout (e.g., `Button.test.tsx` next to `Button.tsx`). You want all tests to follow the same conventions regardless of location. What's the most maintainable way to ensure Claude automatically applies correct conventions?",
       "options": [
         {
@@ -200,7 +200,7 @@
           "label": "B",
           "text": "Consolidate all conventions in the root CLAUDE.md file under headers for each area, relying on Claude to infer which applies",
           "isCorrect": false,
-          "explanation": "Relies on Claude inferring which section applies — unreliable. Also wastes tokens loading all conventions when only some are relevant. EXPLICIT > IMPLICIT."
+          "explanation": "Relies on Claude inferring which section applies â€” unreliable. Also wastes tokens loading all conventions when only some are relevant. EXPLICIT > IMPLICIT."
         },
         {
           "label": "C",
@@ -212,17 +212,17 @@
           "label": "D",
           "text": "Place a separate CLAUDE.md file in each subdirectory containing that area's specific conventions",
           "isCorrect": false,
-          "explanation": "Subdirectory CLAUDE.md files are directory-bound. If test files are spread across many directories, you'd need duplicate files everywhere — unmaintainable."
+          "explanation": "Subdirectory CLAUDE.md files are directory-bound. If test files are spread across many directories, you'd need duplicate files everywhere â€” unmaintainable."
         }
       ],
-      "source": "official"
+      "source": "github"
     },
     {
       "id": 7,
       "domain": "Agentic Architecture & Orchestration",
       "domainShort": "D1",
       "scenario": "Multi-Agent Research System",
-      "isOfficial": true,
+      "isOfficial": false,
       "question": "After running the system on \"impact of AI on creative industries,\" the final reports cover only visual arts, missing music, writing, and film. The coordinator's logs show it decomposed into: \"AI in digital art creation,\" \"AI in graphic design,\" and \"AI in photography.\" What is the most likely root cause?",
       "options": [
         {
@@ -235,7 +235,7 @@
           "label": "B",
           "text": "The coordinator agent's task decomposition is too narrow, resulting in incomplete coverage",
           "isCorrect": true,
-          "explanation": "The coordinator's logs directly reveal the root cause: it decomposed 'creative industries' into only visual arts subtasks. Subagents executed correctly — the problem is what they were assigned."
+          "explanation": "The coordinator's logs directly reveal the root cause: it decomposed 'creative industries' into only visual arts subtasks. Subagents executed correctly â€” the problem is what they were assigned."
         },
         {
           "label": "C",
@@ -247,24 +247,24 @@
           "label": "D",
           "text": "The document analysis agent is filtering out non-visual creative industry sources",
           "isCorrect": false,
-          "explanation": "The document analysis agent was never given non-visual sources to analyze. It didn't filter anything — it simply worked within its assigned scope."
+          "explanation": "The document analysis agent was never given non-visual sources to analyze. It didn't filter anything â€” it simply worked within its assigned scope."
         }
       ],
-      "source": "official"
+      "source": "github"
     },
     {
       "id": 8,
       "domain": "Context Management & Reliability",
       "domainShort": "D5",
       "scenario": "Multi-Agent Research System",
-      "isOfficial": true,
+      "isOfficial": false,
       "question": "The web search subagent times out while researching a complex topic. You need to design how this failure information flows back to the coordinator. Which error propagation approach best enables intelligent recovery?",
       "options": [
         {
           "label": "A",
           "text": "Return structured error context including failure type, attempted query, partial results, and alternative approaches",
           "isCorrect": true,
-          "explanation": "Structured error context gives the coordinator all information needed for intelligent recovery — retry with modified query, try alternatives, or proceed with partial results."
+          "explanation": "Structured error context gives the coordinator all information needed for intelligent recovery â€” retry with modified query, try alternatives, or proceed with partial results."
         },
         {
           "label": "B",
@@ -285,15 +285,15 @@
           "explanation": "Over-reaction. The coordinator could retry, delegate to another subagent, or proceed with partial results. Complete termination wastes all completed work."
         }
       ],
-      "source": "official"
+      "source": "github"
     },
     {
       "id": 9,
       "domain": "Agentic Architecture & Orchestration",
       "domainShort": "D1",
       "scenario": "Multi-Agent Research System",
-      "isOfficial": true,
-      "question": "The synthesis agent frequently needs to verify claims, requiring 2–3 round trips through the coordinator to the web search agent (40% latency increase). 85% are simple fact-checks, 15% need deep investigation. What's the most effective approach?",
+      "isOfficial": false,
+      "question": "The synthesis agent frequently needs to verify claims, requiring 2â€“3 round trips through the coordinator to the web search agent (40% latency increase). 85% are simple fact-checks, 15% need deep investigation. What's the most effective approach?",
       "options": [
         {
           "label": "A",
@@ -305,7 +305,7 @@
           "label": "B",
           "text": "Have synthesis accumulate all verification needs and batch them to the coordinator at the end",
           "isCorrect": false,
-          "explanation": "Batching creates blocking dependencies — synthesis steps may depend on earlier verified facts. Can't synthesize paragraph 3 if paragraph 1's fact-check hasn't returned."
+          "explanation": "Batching creates blocking dependencies â€” synthesis steps may depend on earlier verified facts. Can't synthesize paragraph 3 if paragraph 1's fact-check hasn't returned."
         },
         {
           "label": "C",
@@ -320,14 +320,14 @@
           "explanation": "Speculative caching cannot reliably predict what synthesis will need to verify. Over-fetches in most cases while still missing some verification needs."
         }
       ],
-      "source": "official"
+      "source": "github"
     },
     {
       "id": 10,
       "domain": "Claude Code Configuration & Workflows",
       "domainShort": "D3",
       "scenario": "Claude Code for CI/CD",
-      "isOfficial": true,
+      "isOfficial": false,
       "question": "Your pipeline script runs `claude \"Analyze this pull request for security issues\"` but the job hangs indefinitely. Logs indicate Claude Code is waiting for interactive input. What's the correct approach?",
       "options": [
         {
@@ -355,14 +355,14 @@
           "explanation": "`--batch` is a fabricated flag that does not exist in Claude Code. The real flag is `-p` / `--print`."
         }
       ],
-      "source": "official"
+      "source": "github"
     },
     {
       "id": 11,
       "domain": "Prompt Engineering & Structured Output",
       "domainShort": "D4",
       "scenario": "Claude Code for CI/CD",
-      "isOfficial": true,
+      "isOfficial": false,
       "question": "Your team has two workflows: (1) blocking pre-merge check and (2) overnight technical debt report. Your manager proposes switching both to the Message Batches API for 50% cost savings. How should you evaluate this?",
       "options": [
         {
@@ -390,14 +390,14 @@
           "explanation": "Over-engineered. The simpler solution is matching each API to its appropriate use case. No fallback logic needed."
         }
       ],
-      "source": "official"
+      "source": "github"
     },
     {
       "id": 12,
       "domain": "Prompt Engineering & Structured Output",
       "domainShort": "D4",
       "scenario": "Claude Code for CI/CD",
-      "isOfficial": true,
+      "isOfficial": false,
       "question": "A PR modifying 14 files produces inconsistent review results: detailed feedback for some files, superficial for others, contradictory findings flagging a pattern as bad in one file but approving identical code elsewhere. How should you restructure?",
       "options": [
         {
@@ -408,7 +408,7 @@
         },
         {
           "label": "B",
-          "text": "Require developers to split large PRs into smaller submissions of 3–4 files",
+          "text": "Require developers to split large PRs into smaller submissions of 3â€“4 files",
           "isCorrect": false,
           "explanation": "Shifts burden to developers without improving the system. Large PRs are sometimes necessary."
         },
@@ -416,7 +416,7 @@
           "label": "C",
           "text": "Switch to a higher-tier model with a larger context window",
           "isCorrect": false,
-          "explanation": "Larger context windows don't solve attention quality issues. The problem isn't capacity — it's attention distribution."
+          "explanation": "Larger context windows don't solve attention quality issues. The problem isn't capacity â€” it's attention distribution."
         },
         {
           "label": "D",
@@ -425,14 +425,14 @@
           "explanation": "Requiring consensus suppresses real bugs caught intermittently. Reduces sensitivity without addressing root cause."
         }
       ],
-      "source": "official"
+      "source": "github"
     },
     {
       "id": 106,
       "domain": "Agentic Architecture & Orchestration",
       "domainShort": "D1",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "You are building a customer support agent using the Claude Agent SDK. The agent processes billing disputes by calling tools like `lookup_order`, `get_invoice`, and `process_refund`. A code review notes that after each tool call, your loop checks whether Claude's response text contains the phrase \"I have completed\" to decide whether to stop.\n\nWhat is the primary problem with this loop termination approach?",
       "options": [
         {
@@ -466,7 +466,7 @@
       "domain": "Agentic Architecture & Orchestration",
       "domainShort": "D1",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A developer productivity agent investigates bug reports by calling `search_codebase`, `read_file`, and `run_tests`. During a code review, a colleague proposes adding an iteration cap: if the loop has not finished after 15 tool calls, terminate with a generic \"investigation incomplete\" response.\n\nWhat is the correct characterization of this design?",
       "options": [
         {
@@ -500,7 +500,7 @@
       "domain": "Agentic Architecture & Orchestration",
       "domainShort": "D1",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "Your multi-agent research system's agentic loop appends each tool result to the conversation history before sending the next request. A teammate suggests instead storing all tool results in a separate database and providing only a summary to the model at each iteration, rather than the full result.\n\nUnder what condition would this change most likely degrade agent performance?",
       "options": [
         {
@@ -534,7 +534,7 @@
       "domain": "Agentic Architecture & Orchestration",
       "domainShort": "D1",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "Your multi-agent research system uses a coordinator that always routes every query through all four subagents (web search, document analysis, synthesis, and report generation) regardless of query complexity. For a simple factual question like \"What year was the Anthropic API released?\", the system takes 45 seconds and incurs unnecessary cost.\n\nWhat design change most directly addresses this?",
       "options": [
         {
@@ -568,7 +568,7 @@
       "domain": "Agentic Architecture & Orchestration",
       "domainShort": "D1",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A coordinator agent in your research system has delegated document analysis to a subagent. After the subagent finishes, the coordinator notices the findings are incomplete: the subagent covered only three of the five specified sources. The coordinator needs to get the remaining two sources analyzed.\n\nWhat is the correct approach for re-delegating this work?",
       "options": [
         {
@@ -602,7 +602,7 @@
       "domain": "Agentic Architecture & Orchestration",
       "domainShort": "D1",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "You are building a coordinator that delegates research tasks to subagents using the `Task` tool. When you test the system, the coordinator cannot invoke any subagents. Reviewing the coordinator's `AgentDefinition`, you notice the `allowedTools` field is set to `[\"web_search\", \"read_document\"]`.\n\nWhat is the most likely cause of the failure?",
       "options": [
         {
@@ -636,7 +636,7 @@
       "domain": "Agentic Architecture & Orchestration",
       "domainShort": "D1",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "Your multi-agent research system has a web search subagent that consistently returns findings without identifying which sources correspond to which claims. When the synthesis agent receives these findings, it cannot produce properly cited reports.\n\nWhat is the correct fix during context passing from the web search subagent to the synthesis agent?",
       "options": [
         {
@@ -670,7 +670,7 @@
       "domain": "Agentic Architecture & Orchestration",
       "domainShort": "D1",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A coordinator needs to research three independent subtopics in parallel: market trends, competitor analysis, and regulatory environment. Each requires a separate web search subagent. How should the coordinator spawn these subagents to maximize throughput?",
       "options": [
         {
@@ -704,7 +704,7 @@
       "domain": "Agentic Architecture & Orchestration",
       "domainShort": "D1",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "Your customer support agent handles account closure requests. The workflow requires: (1) verify customer identity via `get_customer`, (2) check for active subscriptions via `check_subscriptions`, (3) process closure via `close_account`. Production logs show the agent occasionally calls `close_account` before completing the identity verification step, resulting in unauthorized account closures.\n\nA colleague suggests adding a system prompt instruction: \"Always verify identity before closing accounts.\" What is the most effective approach?",
       "options": [
         {
@@ -738,7 +738,7 @@
       "domain": "Agentic Architecture & Orchestration",
       "domainShort": "D1",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A customer contacts your support agent about three issues in a single message: a billing charge dispute, a missing order, and a request to update their email address. The agent processes these sequentially, taking 3-4 minutes per request. A senior architect suggests you redesign the handling approach.\n\nWhat design change would most improve efficiency while maintaining accuracy?",
       "options": [
         {
@@ -772,7 +772,7 @@
       "domain": "Agentic Architecture & Orchestration",
       "domainShort": "D1",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "Your customer support agent integrates with three backend MCP tools: a legacy billing system returning Unix timestamps, an order management system returning ISO 8601 dates, and a subscription service returning numeric status codes (1=active, 2=paused, 3=cancelled). The agent frequently misinterprets these heterogeneous formats when reasoning about customer records.\n\nWhat is the most appropriate architectural fix?",
       "options": [
         {
@@ -806,7 +806,7 @@
       "domain": "Agentic Architecture & Orchestration",
       "domainShort": "D1",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "Your customer support agent has a policy: refunds above $500 require manager approval and must not be processed autonomously. Your system prompt states \"Do not process refunds above $500 without manager approval.\" Production logs show this rule is violated in approximately 3% of cases.\n\nWhat is the most effective way to guarantee compliance?",
       "options": [
         {
@@ -840,7 +840,7 @@
       "domain": "Agentic Architecture & Orchestration",
       "domainShort": "D1",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A developer productivity agent has a `PostToolUse` hook that transforms raw Bash output. Currently the hook appends a formatted summary but also preserves the full raw output in the result passed to the model. Sessions exploring large codebases are hitting context limits faster than expected.\n\nWhat change would most effectively reduce unnecessary context consumption from tool results?",
       "options": [
         {
@@ -874,7 +874,7 @@
       "domain": "Agentic Architecture & Orchestration",
       "domainShort": "D1",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "You are building an automated code review system using Claude. The review must cover three aspects for every pull request: security vulnerabilities, style compliance, and performance implications. Each aspect has clear, defined criteria documented in your engineering handbook.\n\nWhich decomposition strategy is most appropriate?",
       "options": [
         {
@@ -908,7 +908,7 @@
       "domain": "Agentic Architecture & Orchestration",
       "domainShort": "D1",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "An engineering team asks you to design a Claude-based system to investigate a production incident. The system must root-cause a bug that was introduced somewhere in the past two weeks across an unknown set of files and services. The scope of the investigation cannot be known in advance.\n\nWhich decomposition approach is most appropriate?",
       "options": [
         {
@@ -942,7 +942,7 @@
       "domain": "Agentic Architecture & Orchestration",
       "domainShort": "D1",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A developer has been using Claude Code to investigate a legacy authentication service. After several hours, they have built up a detailed session with findings about the service's token validation logic. They need to step away and return tomorrow. Three core files in the authentication module will be modified overnight by another team.\n\nWhat is the most reliable approach for resuming the investigation productively the next day?",
       "options": [
         {
@@ -976,7 +976,7 @@
       "domain": "Agentic Architecture & Orchestration",
       "domainShort": "D1",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "You are leading a research investigation using Claude Code. You have completed an initial analysis of a competitor's public API documentation and want to explore two divergent architectural approaches for your response strategy: one focused on feature parity, one focused on differentiation. You want both explorations to start from the same analysis baseline.\n\nWhich session management approach best fits this scenario?",
       "options": [
         {
@@ -1010,7 +1010,7 @@
       "domain": "Tool Design & MCP Integration",
       "domainShort": "D2",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "Your customer support agent has a `lookup_order` tool that is called at the right times, but frequently returns errors. Logs show the agent passes free-text descriptions like \"order from last Tuesday\" instead of the required ISO-8601 timestamp format. The tool description reads: \"Retrieves order details given a date or identifier.\" No examples or format constraints are provided.\n\nWhat change to the tool definition would most directly reduce these input format errors?",
       "options": [
         {
@@ -1044,7 +1044,7 @@
       "domain": "Tool Design & MCP Integration",
       "domainShort": "D2",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "Your customer support agent has three tools with overlapping names and descriptions: `get_account_info` (\"Get information about the account\"), `fetch_account_details` (\"Fetch account details\"), and `retrieve_customer_record` (\"Retrieve customer information\"). All three call different backend systems with different data. The agent frequently picks the wrong tool.\n\nWhich approach most effectively resolves the misrouting?",
       "options": [
         {
@@ -1078,7 +1078,7 @@
       "domain": "Tool Design & MCP Integration",
       "domainShort": "D2",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "Your customer support MCP tool `process_refund` returns the same error response for all failures: `{\"status\": \"error\", \"message\": \"Operation failed\"}`. The agent currently handles all errors by apologizing to the customer and ending the conversation. Logs show this response is triggered by: network timeouts, invalid refund amounts, refunds blocked by fraud detection, and expired order IDs.\n\nWhat structured error response design would most improve the agent's ability to recover appropriately?",
       "options": [
         {
@@ -1112,7 +1112,7 @@
       "domain": "Tool Design & MCP Integration",
       "domainShort": "D2",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A web search subagent in your research system calls `search_web` and receives the following response: `{\"results\": [], \"status\": \"success\"}`. The subagent reports to the coordinator: \"Web search was successful but no relevant results were found.\" Later you discover the search API was actually down and returning empty results for all queries.\n\nWhat change to the MCP tool's error handling would prevent this confusion?",
       "options": [
         {
@@ -1146,7 +1146,7 @@
       "domain": "Tool Design & MCP Integration",
       "domainShort": "D2",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "Your MCP tool `check_fraud_risk` returns `{\"isError\": true, \"message\": \"Refund blocked\"}` when a refund is flagged by fraud detection. The agent interprets this as a transient failure and retries the refund three times before giving up. Each retry generates a separate fraud alert in your compliance system.\n\nWhat is the missing element in the error response design?",
       "options": [
         {
@@ -1180,7 +1180,7 @@
       "domain": "Tool Design & MCP Integration",
       "domainShort": "D2",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "You are building a multi-agent research system with a synthesis agent whose sole job is combining findings from subagents and producing a structured report. You have given the synthesis agent access to all 18 tools in your system: web search, file reading, database queries, email sending, calendar access, and more, reasoning that more tools provide more flexibility.\n\nWhat problem does this configuration most likely introduce?",
       "options": [
         {
@@ -1214,7 +1214,7 @@
       "domain": "Tool Design & MCP Integration",
       "domainShort": "D2",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "Your customer support system requires that every response from the `draft_response` agent includes a structured JSON summary before the agent returns its output. You want to guarantee the agent calls the `generate_summary` tool on every invocation, not optionally.\n\nWhich `tool_choice` configuration achieves this?",
       "options": [
         {
@@ -1248,7 +1248,7 @@
       "domain": "Tool Design & MCP Integration",
       "domainShort": "D2",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "Your team is setting up a shared GitHub MCP server for all engineers on a project. The server requires a GitHub API token for authentication. You want every engineer who clones the repository to have the MCP server available without each person having to manually configure it, and you want to avoid committing the actual token to version control.\n\nWhat is the correct configuration approach?",
       "options": [
         {
@@ -1282,7 +1282,7 @@
       "domain": "Tool Design & MCP Integration",
       "domainShort": "D2",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A developer productivity agent frequently makes multiple exploratory tool calls to discover what data sources are available in your MCP server before it can answer user questions. This pattern increases latency and consumes context for routine requests.\n\nWhat MCP feature most directly addresses this discovery overhead?",
       "options": [
         {
@@ -1316,7 +1316,7 @@
       "domain": "Tool Design & MCP Integration",
       "domainShort": "D2",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A developer productivity agent needs to find all TypeScript files in a project that import from a deprecated module named `legacy-auth`. The project has thousands of files across many directories.\n\nWhich combination of built-in tools is most appropriate for this task?",
       "options": [
         {
@@ -1350,7 +1350,7 @@
       "domain": "Tool Design & MCP Integration",
       "domainShort": "D2",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A developer productivity agent needs to update a configuration value in a file. The value appears in a block of code that contains several nearly identical lines. When the agent uses `Edit`, the tool returns an error: \"Match not unique: found 3 occurrences of the target text.\"\n\nWhat is the correct fallback approach?",
       "options": [
         {
@@ -1384,7 +1384,7 @@
       "domain": "Claude Code Configuration & Workflows",
       "domainShort": "D3",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A senior engineer adds detailed coding standards and security guidelines to their `~/.claude/CLAUDE.md` file. When a new team member joins and clones the repository, they report that Claude Code behaves differently and does not appear to follow the team's documented standards. What is the most likely cause?",
       "options": [
         {
@@ -1418,7 +1418,7 @@
       "domain": "Claude Code Configuration & Workflows",
       "domainShort": "D3",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "Your monorepo has a root `CLAUDE.md` that has grown to over 400 lines, covering Python conventions, TypeScript conventions, infrastructure rules, and testing standards. Developers report that Claude sometimes applies the wrong conventions to the wrong files, and the file is difficult to maintain. What is the best approach to reorganize this configuration?",
       "options": [
         {
@@ -1452,7 +1452,7 @@
       "domain": "Claude Code Configuration & Workflows",
       "domainShort": "D3",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A developer wants a `/scaffold` skill that generates boilerplate for a new microservice. The skill runs many exploratory file reads and Bash commands to understand existing patterns before generating output, producing hundreds of lines of intermediate output. Teammates complain this pollutes their main conversation context. Which frontmatter setting resolves this?",
       "options": [
         {
@@ -1486,7 +1486,7 @@
       "domain": "Claude Code Configuration & Workflows",
       "domainShort": "D3",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "Your team uses Terraform for infrastructure but only in the `infra/` directory. You want Claude to automatically apply Terraform naming conventions and module structure rules only when editing `.tf` files, without those rules appearing in unrelated Python or TypeScript sessions. What is the correct approach?",
       "options": [
         {
@@ -1520,7 +1520,7 @@
       "domain": "Claude Code Configuration & Workflows",
       "domainShort": "D3",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A developer asks Claude Code to add a single null-check to one function in a utility module. The function signature, expected behavior, and fix are all clear. Should they use plan mode or direct execution?",
       "options": [
         {
@@ -1554,7 +1554,7 @@
       "domain": "Claude Code Configuration & Workflows",
       "domainShort": "D3",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A developer is using plan mode to explore a large codebase before deciding how to approach a library migration. During exploration, Claude generates dozens of tool results including full file reads, search outputs, and dependency traces. The developer notices the main conversation context is filling up rapidly and fears context exhaustion before the plan is complete. What is the most appropriate technique to preserve main session context during verbose exploration?",
       "options": [
         {
@@ -1588,7 +1588,7 @@
       "domain": "Claude Code Configuration & Workflows",
       "domainShort": "D3",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A developer asks Claude Code to reformat date strings in a data pipeline. After the first attempt, the output format is partially correct but inconsistent: some dates are formatted as `YYYY-MM-DD`, others as `MM/DD/YYYY`. Prose instructions like \"always use ISO 8601\" have been tried twice without improvement. What technique is most likely to resolve the inconsistency?",
       "options": [
         {
@@ -1622,7 +1622,7 @@
       "domain": "Claude Code Configuration & Workflows",
       "domainShort": "D3",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A development team is using Claude Code to implement a new authentication module. Before any implementation begins, the team lead wants to ensure Claude surfaces potential security considerations, edge cases, and design tradeoffs that the team may not have anticipated. Which iterative refinement technique is most appropriate here?",
       "options": [
         {
@@ -1656,7 +1656,7 @@
       "domain": "Claude Code Configuration & Workflows",
       "domainShort": "D3",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "Claude Code generated a data transformation function that has three separate issues: an off-by-one error in a loop, a missing null check for an optional field, and an incorrect sort order. Each issue is in a completely different part of the function and none of them interact. What is the recommended approach for addressing these issues?",
       "options": [
         {
@@ -1690,7 +1690,7 @@
       "domain": "Claude Code Configuration & Workflows",
       "domainShort": "D3",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A CI pipeline runs Claude Code to generate test cases for each pull request. The team discovers that Claude is consistently suggesting test scenarios that already exist in the existing test files, wasting review time. Which approach in the CLAUDE.md configuration most directly addresses this problem?",
       "options": [
         {
@@ -1724,7 +1724,7 @@
       "domain": "Claude Code Configuration & Workflows",
       "domainShort": "D3",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A developer has identified three issues in a data processing module: two logic bugs that interact because they both affect the same intermediate result, and a set of five inconsistent variable names scattered across multiple files. The logic bugs produce incorrect output only when both are present; the naming violations are independent style issues. How should these issues be addressed using iterative refinement?",
       "options": [
         {
@@ -1758,7 +1758,7 @@
       "domain": "Claude Code Configuration & Workflows",
       "domainShort": "D3",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A team is adding a caching layer to an existing microservice. The service was written two years ago by engineers who are no longer on the team, and its internal patterns for dependency injection and lifecycle management are unfamiliar to the current developer. Before writing any code, the developer wants to ensure Claude surfaces all relevant design considerations. Which iterative refinement technique is most appropriate?",
       "options": [
         {
@@ -1792,7 +1792,7 @@
       "domain": "Claude Code Configuration & Workflows",
       "domainShort": "D3",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A CI pipeline uses Claude Code to review pull requests and needs to post inline comments on specific lines in GitHub. The pipeline currently receives Claude's output as unstructured text, which requires a fragile regex parser to extract file paths, line numbers, and comment text. The parser breaks regularly as Claude's output format drifts between runs. What is the most robust solution?",
       "options": [
         {
@@ -1826,7 +1826,7 @@
       "domain": "Claude Code Configuration & Workflows",
       "domainShort": "D3",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "You maintain a monorepo with five packages: a Python backend, a TypeScript frontend, a Go service, shared infrastructure Terraform, and a documentation site. Each package has different linting standards, testing conventions, and framework-specific rules. The root `CLAUDE.md` has grown to 600 lines and developers report that rules intended for one package often bleed into sessions working on another. What is the most modular and maintainable solution using CLAUDE.md configuration?",
       "options": [
         {
@@ -1860,7 +1860,7 @@
       "domain": "Prompt Engineering & Structured Output",
       "domainShort": "D4",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A CI code review prompt flags 60% of pull requests for \"potential security vulnerabilities.\" Developers have stopped reading the reports because nearly all flags are false positives on standard input validation patterns they consider acceptable. Adding \"only report high-confidence findings\" to the prompt has had no measurable effect. What is the most effective next step?",
       "options": [
         {
@@ -1894,7 +1894,7 @@
       "domain": "Prompt Engineering & Structured Output",
       "domainShort": "D4",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A Claude-based pull request reviewer raises \"magic number\" warnings on every numeric literal in the codebase, including well-understood constants like HTTP status codes and standard buffer sizes. Developers want magic numbers flagged only when they appear in business logic with no explanation. How should the prompt be updated?",
       "options": [
         {
@@ -1928,7 +1928,7 @@
       "domain": "Prompt Engineering & Structured Output",
       "domainShort": "D4",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A Claude-based code reviewer is generating inconsistent feedback on documentation quality: sometimes flagging missing docstrings for private helper functions, sometimes not; sometimes requiring full parameter descriptions, sometimes accepting one-line summaries. The team wants consistent, predictable documentation feedback on public API functions only. Which change most directly addresses the inconsistency?",
       "options": [
         {
@@ -1962,7 +1962,7 @@
       "domain": "Prompt Engineering & Structured Output",
       "domainShort": "D4",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A team uses Claude to generate code review comments for pull requests. The comments are technically accurate but vary widely in format: some include file paths and line numbers, others are vague summaries, some use bullet points, and others write prose paragraphs. Developers want a consistent, actionable format: file path, line number, issue description, suggested fix. What is the most effective way to achieve this?",
       "options": [
         {
@@ -1996,7 +1996,7 @@
       "domain": "Prompt Engineering & Structured Output",
       "domainShort": "D4",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A structured data extraction system is extracting contract clauses from legal documents. The model handles standard clauses well but consistently misclassifies ambiguous clauses that could fit two or more categories, such as a clause that contains both termination conditions and force majeure language. What few-shot prompting approach is most effective for improving accuracy on these edge cases?",
       "options": [
         {
@@ -2030,7 +2030,7 @@
       "domain": "Prompt Engineering & Structured Output",
       "domainShort": "D4",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A document extraction system uses Claude to pull financial figures from quarterly earnings reports. The reports have varied formats: some use tables, some use inline prose, some use both. Extraction accuracy for tabular data is high (94%) but prose-only documents show only 72% accuracy. What is the most targeted approach to improve prose extraction accuracy?",
       "options": [
         {
@@ -2064,7 +2064,7 @@
       "domain": "Prompt Engineering & Structured Output",
       "domainShort": "D4",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "Your extraction pipeline uses a prompt that requests JSON output with a code block. In production, approximately 3% of responses have JSON syntax errors: missing commas, unescaped characters, or truncated objects. These errors break your downstream parser and require manual reprocessing. What is the most reliable way to eliminate JSON syntax errors?",
       "options": [
         {
@@ -2098,7 +2098,7 @@
       "domain": "Prompt Engineering & Structured Output",
       "domainShort": "D4",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "Your structured data extraction pipeline processes invoices. You have two extraction tools: extract_invoice_schema and extract_receipt_schema. For each document, you do not know in advance which type it is. After switching to tool_choice: \"auto\", you observe that 30% of the time the model returns a text description of what it found rather than calling either tool. What is the correct fix?",
       "options": [
         {
@@ -2132,7 +2132,7 @@
       "domain": "Prompt Engineering & Structured Output",
       "domainShort": "D4",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "An invoice extraction pipeline uses tool use with a strict JSON schema. After validation, 8% of extracted invoices fail a business rule check: the sum of line item amounts does not equal the total_amount field. These are semantic errors, not schema syntax errors. The invoices are well-formed documents with no missing data. How should you implement the retry loop?",
       "options": [
         {
@@ -2166,7 +2166,7 @@
       "domain": "Prompt Engineering & Structured Output",
       "domainShort": "D4",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A CI code review pipeline is generating false positive findings at a high rate. The team wants to understand which specific code constructs are being flagged incorrectly so they can refine the prompt. The current findings output only includes file, line, and description. What schema change would best enable systematic false positive analysis?",
       "options": [
         {
@@ -2200,7 +2200,7 @@
       "domain": "Prompt Engineering & Structured Output",
       "domainShort": "D4",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A compliance team runs a weekly audit that analyzes 50,000 contract documents for regulatory clauses. The audit results are reviewed by a compliance analyst every Monday morning. The team is considering the Message Batches API. A colleague raises a concern: \"What if a batch fails partway through the 50,000 documents?\" How should partial batch failures be handled?",
       "options": [
         {
@@ -2234,7 +2234,7 @@
       "domain": "Prompt Engineering & Structured Output",
       "domainShort": "D4",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A developer generates a 300-line module using Claude Code in one session, then asks the same session to review the code for bugs. The review returns \"looks good\" with minor style suggestions but misses two logic errors that a colleague catches in manual review. What is the most likely cause, and what architectural change addresses it?",
       "options": [
         {
@@ -2268,7 +2268,7 @@
       "domain": "Prompt Engineering & Structured Output",
       "domainShort": "D4",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A financial document extraction pipeline is failing on the \"guarantor address\" field for a set of loan summaries. After 3 retry attempts with error feedback, the field still extracts as null. Each retry prompt includes the original document and the validation error. What should you investigate before scheduling further retries?",
       "options": [
         {
@@ -2302,7 +2302,7 @@
       "domain": "Prompt Engineering & Structured Output",
       "domainShort": "D4",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A developer builds a code generation pipeline where Claude generates a 200-line module, and then the same session reviews the generated code for correctness. The review returns only minor style suggestions and misses a logic error in the error handling path. A second developer reviewing the code manually finds the bug immediately. What architectural change would make the review phase more effective?",
       "options": [
         {
@@ -2336,7 +2336,7 @@
       "domain": "Context Management & Reliability",
       "domainShort": "D5",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A customer support agent is handling a complex billing dispute that spans 20+ turns. A customer mentioned early in the conversation that they were charged $847.50 on March 3rd for a service they cancelled on February 28th. Midway through the conversation, the agent references the charge as \"the overcharge from last month\" without the specific amount. The customer disputes the agent's understanding of the case. What context management technique would prevent this?",
       "options": [
         {
@@ -2370,7 +2370,7 @@
       "domain": "Context Management & Reliability",
       "domainShort": "D5",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A multi-agent research pipeline aggregates findings from six subagents, each returning 800-1,200 tokens of raw tool output and reasoning. The synthesis agent receives all results in a single large message. The final report consistently omits or contradicts findings that appeared in the middle sections of the aggregated input. What is the most likely cause and the most effective mitigation?",
       "options": [
         {
@@ -2404,7 +2404,7 @@
       "domain": "Context Management & Reliability",
       "domainShort": "D5",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A customer opens a support chat saying \"I'd like to speak to a human please. I've been dealing with this billing issue for three weeks and I'm frustrated.\" The agent has already identified this as a standard billing adjustment that it can resolve in 2 steps using its available tools. Your agent responds by saying \"I can help with that right away, let me pull up your account.\" and proceeds to investigate. The customer repeats their request for a human. What is wrong with this behavior and what should be corrected?",
       "options": [
         {
@@ -2438,7 +2438,7 @@
       "domain": "Context Management & Reliability",
       "domainShort": "D5",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "Your web search subagent encounters a timeout while fetching results for a competitor analysis. The engineering team implements a change so the subagent catches the timeout internally and returns an empty result set with status: \"success\" and results: []. The coordinator receives this and the synthesis agent produces a report that is missing the competitive section entirely, with no indication anything went wrong. What is the problem with this approach?",
       "options": [
         {
@@ -2472,7 +2472,7 @@
       "domain": "Context Management & Reliability",
       "domainShort": "D5",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "An agent is performing a deep exploration of a 200,000-line legacy codebase to understand its payment processing flow. After approximately 90 minutes and dozens of file reads, the agent begins referencing \"standard patterns in payment systems\" rather than the specific classes and flows it found earlier, and its answers become inconsistent with findings from the first hour. What is the most likely cause and the best mitigation strategy?",
       "options": [
         {
@@ -2506,7 +2506,7 @@
       "domain": "Context Management & Reliability",
       "domainShort": "D5",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "You are running a multi-phase codebase investigation using the Claude Agent SDK. After 45 minutes of exploration (reading files, tracing call chains, building a dependency map) you move into the second phase: identifying security vulnerabilities in the authentication module. You notice the agent is now describing the authentication module as \"using standard JWT patterns\" when earlier in the session it had found a custom token signing implementation. What technique would most effectively preserve key findings across these phase boundaries?",
       "options": [
         {
@@ -2540,7 +2540,7 @@
       "domain": "Context Management & Reliability",
       "domainShort": "D5",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A structured data extraction system for insurance claims achieves 97% overall accuracy on a validation set. The team proposes automating the full workflow without human review. A colleague argues this aggregate metric masks important risks. What is the most important concern?",
       "options": [
         {
@@ -2574,7 +2574,7 @@
       "domain": "Context Management & Reliability",
       "domainShort": "D5",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "An extraction pipeline achieves high accuracy on average but the team wants to implement confidence-based routing: high-confidence extractions proceed automatically while low-confidence ones go to human review. A developer proposes using the model's stated confidence scores directly as the routing threshold. What is the critical flaw in this approach?",
       "options": [
         {
@@ -2608,7 +2608,7 @@
       "domain": "Context Management & Reliability",
       "domainShort": "D5",
       "isOfficial": false,
-      "source": "community",
+      "source": "github",
       "question": "A research synthesis agent is combining findings from five subagents that searched different sources. The final report states that \"AI adoption in healthcare reached 45% in 2024\" but does not cite which source this came from. A reviewer cannot verify the claim because the subagents' individual outputs were not preserved. What structural change to the pipeline would prevent this provenance loss?",
       "options": [
         {
@@ -2637,5 +2637,8 @@
         }
       ]
     }
-  ]
+  ],
+  "disclaimer": "Community practice exam from the Anthropic courses repository. Used for educational preparation purposes only.",
+  "isDefault": true,
+  "sourceUrl": "https://github.com/anthropics/courses/tree/master/claude_certified_architect_foundations"
 }

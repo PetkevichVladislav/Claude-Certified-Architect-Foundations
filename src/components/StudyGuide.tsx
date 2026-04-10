@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ChevronDown, ChevronRight, Star, BookOpen, ExternalLink, Clock, GraduationCap, Target, Layout, ShieldAlert, AlertTriangle } from 'lucide-react'
+import { ChevronDown, ChevronRight, Star, BookOpen, ExternalLink, Clock, GraduationCap } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { domains } from '@/data/domains'
 import { resources, levelInfo, type Level } from '@/data/resources'
@@ -42,44 +42,6 @@ function Section({ title, icon, children, defaultOpen = false, context }: Sectio
 export function StudyGuide() {
   return (
     <div className="space-y-4">
-      {/* About This Site — top of page */}
-      <div className="border border-[var(--border)] rounded-xl p-6 space-y-4">
-        <div>
-          <h3 className="text-sm font-bold mb-2 flex items-center gap-1.5">
-            <Layout size={14} className="text-indigo-600" /> Why This Site &amp; How It&apos;s Organized
-          </h3>
-          <p className="text-xs text-[var(--muted-foreground)] mb-3">
-            The CCA-F exam is unique: rote memorization won&apos;t pass it. You need a <strong>systematic elimination algorithm</strong> to consistently pick the best option from four plausible ones. This site teaches that algorithm and lets you practice it.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-            <div className="bg-slate-50 rounded-lg p-2.5 border border-slate-100">
-              <div className="font-semibold text-indigo-700 mb-0.5">📖 Learn (this tab)</div>
-              <div className="text-[var(--muted-foreground)]">Exam overview, 5 domains with weights, and a curated learning path from beginner to expert.</div>
-            </div>
-            <div className="bg-slate-50 rounded-lg p-2.5 border border-slate-100">
-              <div className="font-semibold text-indigo-700 mb-0.5">🧠 Exam Strategy</div>
-              <div className="text-[var(--muted-foreground)]">The 3-step elimination algorithm, priority rules, anti-patterns to spot, and interactive walkthroughs on real questions.</div>
-            </div>
-            <div className="bg-slate-50 rounded-lg p-2.5 border border-slate-100">
-              <div className="font-semibold text-indigo-700 mb-0.5">🌲 Decision Tree</div>
-              <div className="text-[var(--muted-foreground)]">Visual flowchart of the decision algorithm — trace any question through the tree to see which rules eliminate which options.</div>
-            </div>
-            <div className="bg-slate-50 rounded-lg p-2.5 border border-slate-100">
-              <div className="font-semibold text-indigo-700 mb-0.5">📝 Practice Test</div>
-              <div className="text-[var(--muted-foreground)]">Multiple question banks (official samples, community, AI-generated). Filter by domain, shuffle, and review with full explanations.</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Disclaimer */}
-        <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 flex gap-2">
-          <ShieldAlert size={16} className="text-amber-600 shrink-0 mt-0.5" />
-          <div className="text-xs text-amber-900">
-            <strong>Disclaimer:</strong> This is a community study tool, not an official Anthropic product. Practice questions are retro-engineered from the published exam guide and may differ from the real exam in wording, difficulty, and scenario context. The real exam uses longer stems with richer context and may test nuances not covered here. Use this site to build your reasoning framework, then validate with Anthropic&apos;s official resources.
-          </div>
-        </div>
-      </div>
-
       {/* Exam Overview Card */}
       <div className="bg-gradient-to-r from-indigo-50 to-violet-50 border border-indigo-200 rounded-xl p-6">
         <h2 className="text-lg font-bold mb-2 flex items-center gap-2">
@@ -104,22 +66,10 @@ export function StudyGuide() {
             </div>
           ))}
         </div>
-        {/* What the Real Exam Looks Like */}
-        <div className="mt-4 bg-white/80 rounded-lg border border-indigo-100 p-4">
-          <h3 className="text-sm font-bold mb-2 flex items-center gap-1.5">
-            <Target size={14} className="text-indigo-600" /> What the Real Exam Looks Like
-          </h3>
-          <ul className="text-xs text-[var(--muted-foreground)] space-y-1.5 list-none">
-            <li>• <strong>60 questions</strong> across <strong>6 scenarios</strong> — 4 scenarios randomly selected per exam sitting</li>
-            <li>• Each scenario: ~15 questions sharing a real-world context (e.g., "a healthcare triage agent", "a CI/CD review pipeline")</li>
-            <li>• Long question stems (5–8 sentences) describing system architecture, observed behavior, and constraints</li>
-            <li>• <strong>All 4 options are valid approaches</strong> — you must pick the <em>architecturally best</em> one, not the only correct one</li>
-            <li>• Explanations focus on why other options are <em>less optimal</em>, not why they're wrong</li>
-            <li>• Well-documented exam traps: progressive summarization, <code className="bg-slate-100 px-1 rounded text-[11px]">tool_choice: "any"</code> vs <code className="bg-slate-100 px-1 rounded text-[11px]">tool_choice: &#123;"type": "tool"&#125;</code>, fabricated features, sentiment-based escalation, self-reported confidence scores</li>
-          </ul>
-        </div>
-        {/* Official link */}
-        <div className="mt-3">
+        <div className="mt-4 flex flex-col gap-2">
+          <p className="text-sm text-indigo-800 bg-indigo-100 rounded-lg p-3">
+            <strong>Key insight:</strong> This is a "best answer" exam — multiple options may be valid, but only one is architecturally correct. Learn the <a href="#" className="underline font-semibold" onClick={e => e.preventDefault()}>Exam Strategy</a> tab to master the elimination algorithm.
+          </p>
           <a
             href="https://www.anthropic.com/certification"
             target="_blank"
@@ -129,14 +79,6 @@ export function StudyGuide() {
             <ExternalLink size={14} /> Official Certification Page →
           </a>
         </div>
-      </div>
-
-      {/* Insight Banner — under exam overview */}
-      <div className="bg-indigo-100 border border-indigo-300 rounded-xl p-4 flex gap-3 items-start">
-        <AlertTriangle size={20} className="text-indigo-700 shrink-0 mt-0.5" />
-        <p className="text-sm text-indigo-800">
-          This is a &ldquo;best answer&rdquo; exam — multiple options may be valid, but only one is architecturally correct. Learn the <strong>Exam Strategy</strong> tab to master the elimination algorithm.
-        </p>
       </div>
 
       {/* 5 Domains */}
@@ -163,7 +105,7 @@ export function StudyGuide() {
                 <p className="text-xs opacity-80 mb-2">{d.description}</p>
                 <div className="flex flex-wrap gap-1">
                   {d.topics.map((t, j) => (
-                    <span key={j} className="text-[10px] bg-white/60 rounded px-1.5 py-0.5">{t}</span>
+                    <span key={j} className="text-[0.625rem] bg-white/60 rounded px-1.5 py-0.5">{t}</span>
                   ))}
                 </div>
               </div>
@@ -216,16 +158,16 @@ export function StudyGuide() {
                               {r.title} <ExternalLink size={11} />
                             </a>
                           )}
-                          <span className="text-[10px] text-[var(--muted-foreground)] ml-2">{r.source}</span>
+                          <span className="text-[0.625rem] text-[var(--muted-foreground)] ml-2">{r.source}</span>
                         </div>
-                        <span className="text-[10px] font-medium text-[var(--muted-foreground)] whitespace-nowrap flex items-center gap-0.5">
+                        <span className="text-[0.625rem] font-medium text-[var(--muted-foreground)] whitespace-nowrap flex items-center gap-0.5">
                           <Clock size={10} /> {r.timeHours}h
                         </span>
                       </div>
                       <p className="text-xs text-[var(--muted-foreground)] mt-1">{r.description}</p>
                       <div className="flex flex-wrap gap-1 mt-1.5">
                         {r.topics.map((t, j) => (
-                          <span key={j} className="text-[10px] bg-[var(--muted)] rounded px-1.5 py-0.5">{t}</span>
+                          <span key={j} className="text-[0.625rem] bg-[var(--muted)] rounded px-1.5 py-0.5">{t}</span>
                         ))}
                       </div>
                     </div>

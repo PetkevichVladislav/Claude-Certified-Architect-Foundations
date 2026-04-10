@@ -1,9 +1,33 @@
 [
   {
+    "id": "certsafari",
+    "name": "CertSafari Practice Questions",
+    "icon": "🦁",
+    "description": "115 practice questions from CertSafari.com",
+    "disclaimer": "Practice questions from CertSafari. Used for educational preparation purposes only.",
+    "sourceUrl": "https://www.certsafari.com/anthropic/claude-certified-architect",
+    "file": "certsafari.json",
+    "count": 115,
+    "isDefault": false
+  },
+  {
+    "id": "claudeprepareexam",
+    "name": "ClaudePrepareExam",
+    "icon": "🧠",
+    "description": "93 AI-generated practice questions across all 5 domains",
+    "disclaimer": "AI-generated practice questions. Not affiliated with Anthropic. Used for educational purposes only.",
+    "sourceUrl": "https://claudeprepareexam.com",
+    "file": "claudeprepareexam.json",
+    "count": 93,
+    "isDefault": false
+  },
+  {
     "id": "github",
     "name": "GitHub Practice Exam",
     "icon": "🐙",
     "description": "77 scenario-based questions from the community CCA-F practice exam",
+    "disclaimer": "Community practice exam from the Anthropic courses repository. Used for educational preparation purposes only.",
+    "sourceUrl": "https://github.com/anthropics/courses/tree/master/claude_certified_architect_foundations",
     "file": "github.json",
     "count": 77,
     "isDefault": true
@@ -13,26 +37,10 @@
     "name": "Official Anthropic Samples",
     "icon": "⭐",
     "description": "12 official questions from the Anthropic CCA-F exam guide",
+    "disclaimer": "Official sample questions from the Anthropic CCA-F exam guide. Used for educational preparation purposes only.",
+    "sourceUrl": "https://www.anthropic.com/certification",
     "file": "official.json",
     "count": 12,
-    "isDefault": false
-  },
-  {
-    "id": "claudeprepareexam",
-    "name": "ClaudePrepareExam",
-    "icon": "🧠",
-    "description": "93 AI-generated practice questions across all 5 domains",
-    "file": "claudeprepareexam.json",
-    "count": 93,
-    "isDefault": false
-  },
-  {
-    "id": "all",
-    "name": "Complete Bank",
-    "icon": "📚",
-    "description": "All 170 questions combined from every source",
-    "file": "all.json",
-    "count": 170,
     "isDefault": false
   }
 ]

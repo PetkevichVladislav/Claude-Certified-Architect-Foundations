@@ -4,7 +4,7 @@ import type { QuizQuestion } from '@/data/questions'
 import { loadBankIndex, loadBank, type BankIndex } from '@/data/questionBanks'
 import {
   CheckCircle, XCircle, ChevronLeft, ChevronRight, RotateCcw,
-  Timer, Star, Filter, Trophy, BarChart3, Shuffle, Square, Library
+  Timer, Star, Filter, Trophy, BarChart3, Shuffle, Square, Library, Info, ExternalLink
 } from 'lucide-react'
 
 type QuizMode = 'setup' | 'active' | 'review' | 'results'
@@ -30,6 +30,7 @@ export function Quiz() {
   const [mode, setMode] = useState<QuizMode>('setup')
   const [selectedBankId, setSelectedBankId] = useState<string>('')
   const [bankQuestions, setBankQuestions] = useState<QuizQuestion[]>([])
+  const [bankSourceUrl, setBankSourceUrl] = useState('')
   const [domainFilter, setDomainFilter] = useState<DomainFilter>('all')
   const [shuffled, setShuffled] = useState(false)
   const [quizQuestions, setQuizQuestions] = useState<QuizQuestion[]>([])
@@ -45,13 +46,15 @@ export function Quiz() {
       setBankIndex(idx)
       const def = idx.find(b => b.isDefault) ?? idx[0]
       if (def) setSelectedBankId(def.id)
-    })
+    }).catch(err => console.error('Failed to load bank index:', err))
   }, [])
 
-  // Load bank questions whenever selectedBankId changes
   useEffect(() => {
     if (!selectedBankId) return
-    loadBank(selectedBankId).then(data => setBankQuestions(data.questions))
+    loadBank(selectedBankId).then(data => {
+      setBankQuestions(data.questions)
+      setBankSourceUrl(data.sourceUrl || '')
+    }).catch(err => console.error('Failed to load bank:', selectedBankId, err))
   }, [selectedBankId])
 
   const selectedBank = useMemo(() =>
@@ -129,31 +132,51 @@ export function Quiz() {
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {bankIndex.map(bank => (
-              <button
-                key={bank.id}
-                onClick={() => setSelectedBankId(bank.id)}
-                className={cn(
-                  'text-left p-3 rounded-lg border transition-all',
-                  selectedBankId === bank.id
-                    ? 'border-indigo-500 bg-indigo-50 ring-2 ring-indigo-200'
-                    : 'border-[var(--border)] hover:border-indigo-300 hover:bg-indigo-50/50'
-                )}
-              >
-                <div className="flex items-center gap-2">
-                  <span className="text-lg">{bank.icon}</span>
-                  <div>
-                    <div className="text-sm font-medium">{bank.name}</div>
-                    <div className="text-xs text-[var(--muted-foreground)]">
-                      {bank.count} questions{bank.isDefault ? ' • Default' : ''}
+              <div key={bank.id} className="relative group/bank">
+                <button
+                  onClick={() => setSelectedBankId(bank.id)}
+                  className={cn(
+                    'w-full text-left p-3 rounded-lg border transition-all',
+                    selectedBankId === bank.id
+                      ? 'border-indigo-500 bg-indigo-50 ring-2 ring-indigo-200'
+                      : 'border-[var(--border)] hover:border-indigo-300 hover:bg-indigo-50/50'
+                  )}
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg">{bank.icon}</span>
+                    <div className="min-w-0">
+                      <div className="text-sm font-medium">{bank.name}</div>
+                      <div className="text-xs text-[var(--muted-foreground)]">
+                        {bank.count} questions{bank.isDefault ? ' • Default' : ''}
+                      </div>
+                    </div>
+                    {bank.disclaimer && (
+                      <Info size={12} className="ml-auto flex-shrink-0 text-[var(--muted-foreground)] opacity-40" />
+                    )}
+                  </div>
+                </button>
+                {/* Hover popover with clickable links */}
+                {bank.disclaimer && (
+                  <div className="absolute left-0 right-0 top-full z-50 pt-1 hidden group-hover/bank:block">
+                    <div className="bg-white border border-slate-200 rounded-lg shadow-lg p-3 text-xs text-slate-600 space-y-1.5">
+                      <div>{bank.disclaimer}</div>
+                      {bank.sourceUrl && (
+                        <a
+                          href={bank.sourceUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1 text-indigo-600 hover:underline"
+                          onClick={e => e.stopPropagation()}
+                        >
+                          {bank.sourceUrl.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')} <ExternalLink size={10} />
+                        </a>
+                      )}
                     </div>
                   </div>
-                </div>
-              </button>
+                )}
+              </div>
             ))}
           </div>
-          <p className="text-xs text-[var(--muted-foreground)] mt-2">
-            {selectedBank?.description}
-          </p>
         </div>
 
         {/* Domain Filter */}
@@ -211,11 +234,9 @@ export function Quiz() {
   if (mode === 'results') {
     const correct = answers.filter(a => a.isCorrect).length
     const total = answers.length
-    const totalQuestions = quizQuestions.length
-    const stoppedEarly = total < totalQuestions
     const pct = Math.round((correct / total) * 100)
     const scaled = Math.round((correct / total) * 1000)
-    const passed = !stoppedEarly && scaled >= 720
+    const passed = scaled >= 720
     const minutes = Math.floor(elapsedTime / 60000)
     const seconds = Math.floor((elapsedTime % 60000) / 1000)
 
@@ -223,6 +244,7 @@ export function Quiz() {
     const domainStats: Record<string, { correct: number; total: number }> = {}
     answers.forEach(a => {
       const q = bankQuestions.find(q => q.id === a.questionId)!
+      if (!q) return
       const ds = q.domainShort
       if (!domainStats[ds]) domainStats[ds] = { correct: 0, total: 0 }
       domainStats[ds].total++
@@ -236,21 +258,16 @@ export function Quiz() {
           'rounded-xl p-8 text-center',
           passed ? 'bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200' : 'bg-gradient-to-r from-red-50 to-orange-50 border border-red-200'
         )}>
-          <Trophy size={48} className={cn('mx-auto mb-4', passed ? 'text-green-600' : stoppedEarly ? 'text-amber-500' : 'text-red-500')} />
-          {stoppedEarly && (
-            <div className="text-xs text-amber-600 bg-amber-50 border border-amber-200 rounded-full px-3 py-1 inline-block mb-2">
-              Stopped early — {total} of {totalQuestions} questions answered
-            </div>
-          )}
+          <Trophy size={48} className={cn('mx-auto mb-4', passed ? 'text-green-600' : 'text-red-500')} />
           <div className="text-4xl font-bold">{scaled} / 1,000</div>
-          <div className={cn('text-lg font-semibold mt-1', passed ? 'text-green-700' : stoppedEarly ? 'text-amber-700' : 'text-red-700')}>
-            {passed ? 'PASSED' : stoppedEarly ? 'INCOMPLETE' : 'NOT YET PASSING'}
+          <div className={cn('text-lg font-semibold mt-1', passed ? 'text-green-700' : 'text-red-700')}>
+            {passed ? 'PASSED' : 'NOT YET PASSING'}
           </div>
           <div className="text-sm text-[var(--muted-foreground)] mt-2">
             {correct}/{total} correct ({pct}%) • {minutes}m {seconds}s
           </div>
           <div className="text-xs text-[var(--muted-foreground)] mt-1">
-            {stoppedEarly ? `Based on ${total} answered questions` : 'Passing: 720/1,000 (~72% correct)'}
+            Passing: 720/1,000 (~72% correct)
           </div>
         </div>
 
@@ -341,6 +358,7 @@ export function Quiz() {
           selectedAnswer={record?.selectedLabel ?? null}
           answered={true}
           onSelect={() => {}}
+          sourceUrl={bankSourceUrl}
         />
 
         <div className="flex justify-between">
@@ -395,6 +413,7 @@ export function Quiz() {
         selectedAnswer={selectedAnswer}
         answered={answered}
         onSelect={setSelectedAnswer}
+        sourceUrl={bankSourceUrl}
       />
 
       {/* Actions */}
@@ -425,11 +444,13 @@ function QuestionCard({
   selectedAnswer,
   answered,
   onSelect,
+  sourceUrl,
 }: {
   question: QuizQuestion
   selectedAnswer: string | null
   answered: boolean
   onSelect: (label: string) => void
+  sourceUrl?: string
 }) {
   return (
     <div className="border border-[var(--border)] rounded-xl overflow-hidden">
@@ -439,11 +460,29 @@ function QuestionCard({
           <span className="font-mono font-bold bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded">{question.domainShort}</span>
           <span className="text-[var(--muted-foreground)]">{question.domain}</span>
         </div>
-        {question.isOfficial && (
-          <span className="flex items-center gap-1 text-xs text-amber-600 font-semibold">
-            <Star size={12} fill="currentColor" /> Official
-          </span>
-        )}
+        <div className="flex items-center gap-2">
+          {question.source && (
+            sourceUrl ? (
+              <a
+                href={sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded hover:bg-gray-200 transition-colors"
+              >
+                {question.source} <ExternalLink size={10} />
+              </a>
+            ) : (
+              <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">
+                {question.source}
+              </span>
+            )
+          )}
+          {question.isOfficial && (
+            <span className="flex items-center gap-1 text-xs text-amber-600 font-semibold">
+              <Star size={12} fill="currentColor" /> Official
+            </span>
+          )}
+        </div>
       </div>
 
       {/* Scenario */}
