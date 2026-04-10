@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/buildIndex.cjs && tsc -b && vite build",
-    "build:index": "node scripts/buildIndex.cjs",
+    "build": "tsc -b && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
