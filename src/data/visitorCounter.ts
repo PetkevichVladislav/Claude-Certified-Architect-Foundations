@@ -1,5 +1,8 @@
-const BASE_URL = '/api/counter'
+const DEV_BASE_URL = '/api/counter'
+const PROD_BASE_URL = 'https://api.counterapi.dev/v2/uladzislau-piatkievichs-team-3702/first-counter-3702'
 const COUNTERAPI_TOKEN = 'ut_jIWz4rMgbFycP6X6zB2wb0d3QWQE8aBWXnAbSdFB'
+
+const BASE_URL = import.meta.env.DEV ? DEV_BASE_URL : PROD_BASE_URL
 
 function getAuthHeaders() {
   const token = import.meta.env.VITE_COUNTERAPI_TOKEN || COUNTERAPI_TOKEN
