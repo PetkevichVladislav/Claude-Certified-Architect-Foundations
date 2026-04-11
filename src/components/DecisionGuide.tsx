@@ -17,12 +17,12 @@ import {
 
 /* ====== Evidence Tooltip ====== */
 function EvidenceLink({ evidence }: { evidence?: Evidence[] }) {
+  if (!evidence || evidence.length === 0) return null
+
   const [open, setOpen] = useState(false)
   const btnRef = useRef<HTMLButtonElement>(null)
   const popupRef = useRef<HTMLDivElement>(null)
   const [pos, setPos] = useState({ top: 0, left: 0 })
-
-  if (!evidence || evidence.length === 0) return null
 
   // Position the popup above the button
   const updatePos = useCallback(() => {
@@ -630,6 +630,9 @@ export function DecisionGuide() {
         {/* Active Domain Content */}
         {(() => {
           const d = domainQuickRefs[activeDomain]
+          if (!d) {
+            return <div className="text-sm text-[var(--muted-foreground)]">No domain data available.</div>
+          }
           return (
             <div className="space-y-4">
               <h3 className="font-bold text-sm text-[var(--foreground)]">{d.domain}</h3>

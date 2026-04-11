@@ -10,13 +10,13 @@ export function UniqueVisitorCounter() {
     const loadVisitorCount = async () => {
       try {
         const fingerprint = await loadFingerprint()
-        const storedKey = `visitor_seen_${fingerprint}`
-        const hasSeen = localStorage.getItem(storedKey) === 'true'
+        const storedFingerprint = localStorage.getItem('visitor_fingerprint')
+        const isSameBrowser = storedFingerprint === fingerprint
 
-        if (!hasSeen) {
+        if (!isSameBrowser) {
           await incrementCounter()
           try {
-            localStorage.setItem(storedKey, 'true')
+            localStorage.setItem('visitor_fingerprint', fingerprint)
           } catch {
             // ignore storage failures
           }
