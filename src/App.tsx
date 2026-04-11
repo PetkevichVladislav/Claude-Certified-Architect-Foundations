@@ -4,6 +4,7 @@ import { StudyGuide } from './components/StudyGuide'
 import { DecisionGuide } from './components/DecisionGuide'
 import { DecisionTree } from './components/DecisionTree'
 import { Quiz } from './components/Quiz'
+import { UniqueVisitorCounter } from './components/UniqueVisitorCounter'
 import { cn } from './lib/utils'
 
 type Tab = 'guide' | 'decision' | 'tree' | 'test'
@@ -60,10 +61,13 @@ export default function App() {
         <div className="max-w-5xl mx-auto px-4 py-3">
           <div className="flex items-center justify-between gap-2">
             <div className="shrink-0">
-              <h1 className="text-xl font-bold text-[var(--foreground)]">CCA-F Exam Prep</h1>
-              <p className="text-xs text-[var(--muted-foreground)]">Claude Certified Architect — Foundations</p>
+              <div>
+                <h1 className="text-xl font-bold text-[var(--foreground)]">CCA-F Exam Prep</h1>
+                <p className="text-xs text-[var(--muted-foreground)]">Claude Certified Architect — Foundations</p>
+              </div>
             </div>
             <div className="flex items-center gap-3">
+              <UniqueVisitorCounter />
               {/* Font scale button + popup */}
               <div className="relative" ref={scaleRef} style={{ fontSize: '14px' }}>
                 <button

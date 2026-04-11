@@ -14,4 +14,13 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  server: {
+    proxy: {
+      '/api/counter': {
+        target: 'https://api.counterapi.dev/v2/uladzislau-piatkievichs-team-3702/first-counter-3702',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/counter/, ''),
+      },
+    },
+  },
 })
