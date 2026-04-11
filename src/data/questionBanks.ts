@@ -23,14 +23,16 @@ export interface BankData {
 }
 
 const ALL_BANK_ID = '__all__';
-const base = import.meta.env.BASE_URL;
+const rawBase = import.meta.env.BASE_URL ?? '/';
+const base = new URL(rawBase.endsWith('/') ? rawBase : `${rawBase}/`, typeof window !== 'undefined' ? window.location.href : 'http://localhost/').toString();
 
 let indexCache: BankIndex[] | null = null;
 const bankCache = new Map<string, BankData>();
 
 export async function loadBankIndex(): Promise<BankIndex[]> {
   if (indexCache) return indexCache;
-  const res = await fetch(`${base}banks/index.json`);
+  const res = await fetch(new URL('banks/index.json', base).toString());
+  if (!res.ok) throw new Error(`Failed to load bank index: ${res.status} ${res.statusText}`);
   const banks: BankIndex[] = await res.json();
 
   const totalCount = banks.reduce((sum, b) => sum + b.count, 0);
@@ -89,7 +91,8 @@ export async function loadBank(bankId: string): Promise<BankData> {
   const index = await loadBankIndex();
   const entry = index.find(b => b.id === bankId);
   if (!entry) throw new Error(`Bank not found: ${bankId}`);
-  const res = await fetch(`${base}banks/${entry.file}`);
+  const res = await fetch(new URL(`banks/${entry.file}`, base).toString());
+  if (!res.ok) throw new Error(`Failed to load bank data: ${res.status} ${res.statusText}`);
   const data: BankData = await res.json();
   bankCache.set(bankId, data);
   return data;

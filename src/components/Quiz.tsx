@@ -27,6 +27,8 @@ function shuffleArray<T>(array: T[]): T[] {
 
 export function Quiz() {
   const [bankIndex, setBankIndex] = useState<BankIndex[]>([])
+  const [isBankLoading, setIsBankLoading] = useState(true)
+  const [bankLoadError, setBankLoadError] = useState<string | null>(null)
   const [mode, setMode] = useState<QuizMode>('setup')
   const [selectedBankId, setSelectedBankId] = useState<string>('')
   const [bankQuestions, setBankQuestions] = useState<QuizQuestion[]>([])
@@ -42,11 +44,17 @@ export function Quiz() {
   const [elapsedTime, setElapsedTime] = useState(0)
 
   useEffect(() => {
+    setIsBankLoading(true)
+    setBankLoadError(null)
+
     loadBankIndex().then(idx => {
       setBankIndex(idx)
       const def = idx.find(b => b.isDefault) ?? idx[0]
       if (def) setSelectedBankId(def.id)
-    }).catch(err => console.error('Failed to load bank index:', err))
+    }).catch(err => {
+      console.error('Failed to load bank index:', err)
+      setBankLoadError('Unable to load question banks. Please refresh or check your network connection.')
+    }).finally(() => setIsBankLoading(false))
   }, [])
 
   useEffect(() => {
@@ -130,53 +138,68 @@ export function Quiz() {
           <h3 className="font-semibold text-sm mb-3 flex items-center gap-2">
             <Library size={16} /> Question Bank
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {bankIndex.map(bank => (
-              <div key={bank.id} className="relative group/bank">
-                <button
-                  onClick={() => setSelectedBankId(bank.id)}
-                  className={cn(
-                    'w-full text-left p-3 rounded-lg border transition-all',
-                    selectedBankId === bank.id
-                      ? 'border-indigo-500 bg-indigo-50 ring-2 ring-indigo-200'
-                      : 'border-[var(--border)] hover:border-indigo-300 hover:bg-indigo-50/50'
-                  )}
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg">{bank.icon}</span>
-                    <div className="min-w-0">
-                      <div className="text-sm font-medium">{bank.name}</div>
-                      <div className="text-xs text-[var(--muted-foreground)]">
-                        {bank.count} questions{bank.isDefault ? ' • Default' : ''}
-                      </div>
-                    </div>
-                    {bank.disclaimer && (
-                      <Info size={12} className="ml-auto flex-shrink-0 text-[var(--muted-foreground)] opacity-40" />
+          {isBankLoading ? (
+            <div className="rounded-lg border border-dashed border-[var(--border)] p-4 text-sm text-[var(--muted-foreground)]">
+              Loading question banks…
+            </div>
+          ) : bankLoadError ? (
+            <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+              {bankLoadError}
+            </div>
+          ) : bankIndex.length === 0 ? (
+            <div className="rounded-lg border border-dashed border-[var(--border)] p-4 text-sm text-[var(--muted-foreground)]">
+              No question banks are available.
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {bankIndex.map(bank => (
+                <div key={bank.id} className="relative group/bank">
+                  <button
+                    onClick={() => setSelectedBankId(bank.id)}
+                    className={cn(
+                      'w-full text-left p-3 rounded-lg border transition-all',
+                      selectedBankId === bank.id
+                        ? 'border-indigo-500 bg-indigo-50 ring-2 ring-indigo-200'
+                        : 'border-[var(--border)] hover:border-indigo-300 hover:bg-indigo-50/50'
                     )}
-                  </div>
-                </button>
-                {/* Hover popover with clickable links */}
-                {bank.disclaimer && (
-                  <div className="absolute left-0 right-0 top-full z-50 pt-1 hidden group-hover/bank:block">
-                    <div className="bg-white border border-slate-200 rounded-lg shadow-lg p-3 text-xs text-slate-600 space-y-1.5">
-                      <div>{bank.disclaimer}</div>
-                      {bank.sourceUrl && (
-                        <a
-                          href={bank.sourceUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-1 text-indigo-600 hover:underline"
-                          onClick={e => e.stopPropagation()}
-                        >
-                          {bank.sourceUrl.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')} <ExternalLink size={10} />
-                        </a>
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg">{bank.icon}</span>
+                      <div className="min-w-0">
+                        <div className="text-sm font-medium">{bank.name}</div>
+                        <div className="text-xs text-[var(--muted-foreground)]">
+                          {bank.count} questions{bank.isDefault ? ' • Default' : ''}
+                        </div>
+                      </div>
+                      {bank.disclaimer && (
+                        <Info size={12} className="ml-auto flex-shrink-0 text-[var(--muted-foreground)] opacity-40" />
                       )}
                     </div>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+                  </button>
+
+                  {/* Hover popover with clickable links */}
+                  {bank.disclaimer && (
+                    <div className="absolute left-0 right-0 top-full z-50 pt-1 hidden group-hover/bank:block">
+                      <div className="bg-white border border-slate-200 rounded-lg shadow-lg p-3 text-xs text-slate-600 space-y-1.5">
+                        <div>{bank.disclaimer}</div>
+                        {bank.sourceUrl && (
+                          <a
+                            href={bank.sourceUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1 text-indigo-600 hover:underline"
+                            onClick={e => e.stopPropagation()}
+                          >
+                            {bank.sourceUrl.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')} <ExternalLink size={10} />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Domain Filter */}

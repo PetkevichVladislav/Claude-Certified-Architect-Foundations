@@ -68,7 +68,7 @@ export function StudyGuide() {
         </div>
         <div className="mt-4 flex flex-col gap-2">
           <p className="text-sm text-indigo-800 bg-indigo-100 rounded-lg p-3">
-            <strong>Key insight:</strong> This is a "best answer" exam — multiple options may be valid, but only one is architecturally correct. Learn the <a href="#" className="underline font-semibold" onClick={e => e.preventDefault()}>Exam Strategy</a> tab to master the elimination algorithm.
+            <strong>Key insight:</strong> This is a "best answer" exam — multiple options may be valid, but only one is architecturally correct. Learn the <a href="#" className="underline font-semibold" onClick={e => e.preventDefault()}>Decision Engine</a> tab to master the elimination algorithm.
           </p>
           <a
             href="https://www.anthropic.com/certification"
@@ -86,7 +86,7 @@ export function StudyGuide() {
         title="The 5 Domains"
         icon={<Star size={16} className="text-amber-500" />}
         defaultOpen
-        context="Domains define WHAT the exam tests. Study time should be proportional to weights. Domains 1 + 3 = 47% of the exam — focus here first. Each domain maps to specific anti-patterns and priority rules covered in the Exam Strategy tab."
+        context="Domains define WHAT the exam tests. Study time should be proportional to weights. Domains 1 + 3 = 47% of the exam — focus here first. Each domain maps to specific anti-patterns and priority rules covered in the Decision Engine tab."
       >
         <div className="space-y-3">
           {domains.map(d => (
