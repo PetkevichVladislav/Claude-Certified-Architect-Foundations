@@ -47,7 +47,7 @@ export const resources: Resource[] = [
   },
   {
     title: 'Building with the Claude API',
-    url: 'https://anthropic.skilljar.com',
+    url: 'https://anthropic.skilljar.com/claude-with-the-anthropic-api',
     source: 'Anthropic Academy',
     level: 'beginner',
     timeHours: '8–12',
