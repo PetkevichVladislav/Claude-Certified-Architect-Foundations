@@ -1,36 +1,3 @@
-# CCA-F Exam Prep Quiz
-
-Interactive study tool for the **Claude Certified Architect – Foundations (CCA-F)** exam.
-
-## Features
-
-- Multiple question banks (Official, GitHub community, Claude-generated)
-- Study guide with domain breakdown
-- Decision tree for architecture patterns
-- Instant feedback with explanations
-
-## Local Development
-
-```bash
-npm install
-npm run dev
-```
-
-## Build
-
-```bash
-npm run build
-```
-
-## Deploy
-
-Deployed automatically via GitHub Actions on push to `main`.  
-See [DEPLOY-TO-GITHUB.md](DEPLOY-TO-GITHUB.md) for setup instructions.
-
-## Docs
-
-Reference materials in the `docs/` folder:
-- `CCA-F-Study-Guide.md`
-- `CCA-F-Decision-Tree.md`
-- `CCA-F-Practice-Tests.md`
-- `questions.md`
+[![Deploy to GitHub Pages](https://img.shields.io/badge/Live-Demo-blue?style=for-the-badge&logo=github)]([https://petkevichvladislav.github.io/Claude-Certified-Architect-Foundations/)
+A curated collection of notes, explanations, and resources to help you prepare for the Claude Certified Architect – Foundations (CCA-F) exam.
+Covers key topics like agentic architecture, prompt engineering, MCP integration, and Claude Code workflows—focusing on real-world system design and tradeoff decisions required for building production-ready AI applications
