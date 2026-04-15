@@ -7,20 +7,11 @@ import { fileURLToPath } from 'url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
-  base: '/cca-f-quiz/',
+  base: '/Claude-Certified-Architect-Foundations/',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
-  },
-  server: {
-    proxy: {
-      '/api/counter': {
-        target: 'https://api.counterapi.dev/v2/uladzislau-piatkievichs-team-3702/first-counter-3702',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/counter/, ''),
-      },
-    },
-  },
+  }
 })
