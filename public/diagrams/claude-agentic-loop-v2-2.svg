@@ -1,0 +1,366 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1200" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto" fill="#64748b">
+      <polygon points="0 0, 10 3.5, 0 7"/>
+    </marker>
+    <marker id="ab" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto" fill="#3b82f6">
+      <polygon points="0 0, 10 3.5, 0 7"/>
+    </marker>
+    <marker id="ag" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto" fill="#22c55e">
+      <polygon points="0 0, 10 3.5, 0 7"/>
+    </marker>
+    <marker id="ar" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto" fill="#ef4444">
+      <polygon points="0 0, 10 3.5, 0 7"/>
+    </marker>
+    <marker id="ap" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto" fill="#7c3aed">
+      <polygon points="0 0, 10 3.5, 0 7"/>
+    </marker>
+    <marker id="ao" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto" fill="#ea580c">
+      <polygon points="0 0, 10 3.5, 0 7"/>
+    </marker>
+    <filter id="s"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.08"/></filter>
+  </defs>
+
+  <!-- Canvas -->
+  <rect width="1500" height="1200" rx="12" fill="#f8fafc"/>
+
+  <!-- Title -->
+  <text x="750" y="36" text-anchor="middle" font-size="20" font-weight="700" fill="#1e293b">Agentic Loop — Request Flow</text>
+  <text x="750" y="54" text-anchor="middle" font-size="11" fill="#94a3b8">what actually happens when you ask Claude to do something — including agent context, skills, and SubAgent spawning</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- PARTICIPANT LANES (vertical lifelines)          -->
+  <!-- ═══════════════════════════════════════════════ -->
+
+  <!-- Human -->
+  <rect x="60" y="75" width="130" height="48" rx="24" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.2" filter="url(#s)"/>
+  <text x="88" y="104" font-size="18">👤</text>
+  <text x="112" y="102" font-size="13" font-weight="600" fill="#334155">Human</text>
+  <line x1="125" y1="123" x2="125" y2="1150" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- Local Agent (Claude Code) -->
+  <rect x="310" y="75" width="220" height="48" rx="8" fill="#334155" filter="url(#s)"/>
+  <text x="330" y="96" font-size="13" font-weight="600" fill="#fff">Local Agent</text>
+  <text x="330" y="114" font-size="8" fill="#94a3b8">Claude Code on your machine · agentic harness</text>
+  <line x1="420" y1="123" x2="420" y2="1150" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+  <!-- Claude API -->
+  <rect x="690" y="75" width="160" height="48" rx="8" fill="#854d0e" filter="url(#s)"/>
+  <text x="710" y="104" font-size="13" font-weight="600" fill="#fff">Claude API</text>
+  <text x="710" y="118" font-size="8" fill="#fde68a">cloud · stateless</text>
+  <line x1="770" y1="123" x2="770" y2="1150" stroke="#ca8a04" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- Built-in Tools -->
+  <rect x="1010" y="75" width="150" height="48" rx="8" fill="#166534" filter="url(#s)"/>
+  <text x="1030" y="100" font-size="13" font-weight="600" fill="#fff">Built-in Tools</text>
+  <text x="1030" y="116" font-size="8" fill="#86efac">Read, Edit, Bash, Search</text>
+  <line x1="1085" y1="123" x2="1085" y2="1150" stroke="#22c55e" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- MCP Tools -->
+  <rect x="1280" y="75" width="150" height="48" rx="8" fill="#3730a3" filter="url(#s)"/>
+  <text x="1300" y="100" font-size="13" font-weight="600" fill="#fff">MCP Tools</text>
+  <text x="1300" y="116" font-size="8" fill="#a5b4fc">GitHub, DB, custom</text>
+  <line x1="1355" y1="123" x2="1355" y2="1150" stroke="#6366f1" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- STEP 1: Human sends prompt                      -->
+  <!-- ═══════════════════════════════════════════════ -->
+
+  <rect x="15" y="148" width="24" height="24" rx="12" fill="#6366f1"/>
+  <text x="27" y="165" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">1</text>
+
+  <line x1="125" y1="160" x2="415" y2="160" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#ab)"/>
+  <rect x="170" y="143" width="190" height="20" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="0.8"/>
+  <text x="265" y="157" text-anchor="middle" font-size="9" fill="#1e40af">"read main.ts and add logging"</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- STEP 2: Agent assembles context (EXPANDED)      -->
+  <!--   - Merge CLAUDE.md hierarchy                   -->
+  <!--   - Inject agent instructions into system       -->
+  <!--   - Load skill content                          -->
+  <!--   - Filter tools[] per agent settings           -->
+  <!--   - POST /v1/messages ①                        -->
+  <!-- ═══════════════════════════════════════════════ -->
+
+  <rect x="15" y="188" width="24" height="24" rx="12" fill="#6366f1"/>
+  <text x="27" y="205" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">2</text>
+
+  <!-- Expanded context assembly box -->
+  <rect x="350" y="185" width="145" height="108" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1" filter="url(#s)"/>
+  <text x="422" y="202" text-anchor="middle" font-size="9" font-weight="600" fill="#334155">assembles context</text>
+
+  <!-- Sub-steps inside the box -->
+  <rect x="358" y="208" width="130" height="16" rx="3" fill="#eff6ff" stroke="#bfdbfe" stroke-width="0.5"/>
+  <text x="423" y="220" text-anchor="middle" font-size="7" fill="#1e40af">CLAUDE.md as user message</text>
+
+  <rect x="358" y="227" width="130" height="16" rx="3" fill="#fef3c7" stroke="#fde68a" stroke-width="0.5"/>
+  <text x="423" y="239" text-anchor="middle" font-size="7" fill="#92400e">+ agent instructions → system</text>
+
+  <rect x="358" y="246" width="130" height="16" rx="3" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="0.5"/>
+  <text x="423" y="258" text-anchor="middle" font-size="7" fill="#065f46">skill descriptions in context</text>
+
+  <rect x="358" y="265" width="130" height="16" rx="3" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="0.5"/>
+  <text x="423" y="277" text-anchor="middle" font-size="7" fill="#166534">filter tools[] per agent</text>
+
+  <!-- POST arrow -->
+  <line x1="495" y1="240" x2="765" y2="240" stroke="#334155" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="555" y="228" width="176" height="18" rx="4" fill="#334155"/>
+  <text x="643" y="241" text-anchor="middle" font-size="9" fill="#fff" font-weight="500">POST /v1/messages  ①</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- STEP 3: Claude responds with tool_use (Read)    -->
+  <!-- ═══════════════════════════════════════════════ -->
+
+  <rect x="15" y="310" width="24" height="24" rx="12" fill="#6366f1"/>
+  <text x="27" y="327" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">3</text>
+
+  <!-- Claude thinks -->
+  <rect x="720" y="306" width="100" height="40" rx="6" fill="#fefce8" stroke="#fde68a" stroke-width="0.8"/>
+  <text x="770" y="323" text-anchor="middle" font-size="9" fill="#854d0e">thinks...</text>
+  <text x="770" y="337" text-anchor="middle" font-size="8" fill="#ca8a04">"I need to read</text>
+  <text x="770" y="345" text-anchor="middle" font-size="8" fill="#ca8a04"> the file first"</text>
+
+  <!-- Response arrow back -->
+  <line x1="765" y1="360" x2="425" y2="360" stroke="#ef4444" stroke-width="1.5" marker-end="url(#ar)"/>
+  <rect x="488" y="348" width="228" height="18" rx="4" fill="#fef2f2" stroke="#fecaca" stroke-width="0.8"/>
+  <text x="602" y="361" text-anchor="middle" font-size="9" fill="#dc2626">stop: tool_use → { name: "Read", path: "main.ts" }</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- STEP 4: Local Agent executes the built-in tool  -->
+  <!--   (agent-filtered permission check)             -->
+  <!-- ═══════════════════════════════════════════════ -->
+
+  <rect x="15" y="383" width="24" height="24" rx="12" fill="#6366f1"/>
+  <text x="27" y="400" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">4</text>
+
+  <!-- Permission check — agent-aware -->
+  <rect x="367" y="385" width="106" height="30" rx="6" fill="#fff1f2" stroke="#fecdd3" stroke-width="0.8"/>
+  <text x="420" y="399" text-anchor="middle" font-size="7" fill="#be123c">✓ agent-filtered</text>
+  <text x="420" y="409" text-anchor="middle" font-size="7" fill="#be123c">permission ok</text>
+
+  <!-- Execute on built-in tool -->
+  <line x1="420" y1="415" x2="420" y2="428" stroke="#64748b" stroke-width="1"/>
+  <line x1="425" y1="428" x2="1080" y2="428" stroke="#22c55e" stroke-width="1.5" marker-end="url(#ag)"/>
+  <rect x="650" y="416" width="250" height="18" rx="4" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="0.8"/>
+  <text x="775" y="429" text-anchor="middle" font-size="9" fill="#166534">execute Read("main.ts") on your machine</text>
+
+  <!-- Result back -->
+  <line x1="1080" y1="450" x2="425" y2="450" stroke="#22c55e" stroke-width="1.5" marker-end="url(#ag)"/>
+  <rect x="600" y="438" width="300" height="18" rx="4" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="0.8"/>
+  <text x="750" y="451" text-anchor="middle" font-size="9" fill="#166534">tool_result: "import express from 'express';\n..."</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- STEP 5: Agent sends tool_result → POST ②       -->
+  <!-- ═══════════════════════════════════════════════ -->
+
+  <rect x="15" y="472" width="24" height="24" rx="12" fill="#6366f1"/>
+  <text x="27" y="489" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">5</text>
+
+  <rect x="365" y="470" width="110" height="40" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1" filter="url(#s)"/>
+  <text x="420" y="487" text-anchor="middle" font-size="8" font-weight="600" fill="#334155">appends tool_result</text>
+  <text x="420" y="501" text-anchor="middle" font-size="8" fill="#64748b">to messages[]</text>
+
+  <line x1="475" y1="492" x2="765" y2="492" stroke="#334155" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="540" y="480" width="176" height="18" rx="4" fill="#334155"/>
+  <text x="628" y="493" text-anchor="middle" font-size="9" fill="#fff" font-weight="500">POST /v1/messages  ②</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- STEP 6: Claude responds with tool_use (Edit)    -->
+  <!-- ═══════════════════════════════════════════════ -->
+
+  <rect x="15" y="522" width="24" height="24" rx="12" fill="#6366f1"/>
+  <text x="27" y="539" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">6</text>
+
+  <rect x="720" y="518" width="100" height="36" rx="6" fill="#fefce8" stroke="#fde68a" stroke-width="0.8"/>
+  <text x="770" y="533" text-anchor="middle" font-size="9" fill="#854d0e">thinks...</text>
+  <text x="770" y="547" text-anchor="middle" font-size="8" fill="#ca8a04">"now I'll add logging"</text>
+
+  <line x1="765" y1="568" x2="425" y2="568" stroke="#ef4444" stroke-width="1.5" marker-end="url(#ar)"/>
+  <rect x="465" y="556" width="252" height="18" rx="4" fill="#fef2f2" stroke="#fecaca" stroke-width="0.8"/>
+  <text x="591" y="569" text-anchor="middle" font-size="9" fill="#dc2626">stop: tool_use → { name: "Edit", old: "...", new: "..." }</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- STEP 7: Agent executes Edit tool                -->
+  <!--   (agent-filtered permission check)             -->
+  <!-- ═══════════════════════════════════════════════ -->
+
+  <rect x="15" y="590" width="24" height="24" rx="12" fill="#6366f1"/>
+  <text x="27" y="607" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">7</text>
+
+  <rect x="367" y="592" width="106" height="30" rx="6" fill="#fff1f2" stroke="#fecdd3" stroke-width="0.8"/>
+  <text x="420" y="606" text-anchor="middle" font-size="7" fill="#be123c">✓ agent-filtered</text>
+  <text x="420" y="616" text-anchor="middle" font-size="7" fill="#be123c">permission ok</text>
+
+  <line x1="425" y1="627" x2="1080" y2="627" stroke="#22c55e" stroke-width="1.5" marker-end="url(#ag)"/>
+  <rect x="650" y="615" width="250" height="18" rx="4" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="0.8"/>
+  <text x="775" y="628" text-anchor="middle" font-size="9" fill="#166534">execute Edit("main.ts", old, new) locally</text>
+
+  <line x1="1080" y1="650" x2="425" y2="650" stroke="#22c55e" stroke-width="1.5" marker-end="url(#ag)"/>
+  <rect x="665" y="638" width="220" height="18" rx="4" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="0.8"/>
+  <text x="775" y="651" text-anchor="middle" font-size="9" fill="#166534">tool_result: "file edited successfully"</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- STEP 8: Agent sends tool_result → POST ③       -->
+  <!-- ═══════════════════════════════════════════════ -->
+
+  <rect x="15" y="670" width="24" height="24" rx="12" fill="#6366f1"/>
+  <text x="27" y="687" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">8</text>
+
+  <rect x="365" y="667" width="110" height="40" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1" filter="url(#s)"/>
+  <text x="420" y="684" text-anchor="middle" font-size="8" font-weight="600" fill="#334155">appends tool_result</text>
+  <text x="420" y="698" text-anchor="middle" font-size="8" fill="#64748b">to messages[]</text>
+
+  <line x1="475" y1="688" x2="765" y2="688" stroke="#334155" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="540" y="676" width="176" height="18" rx="4" fill="#334155"/>
+  <text x="628" y="689" text-anchor="middle" font-size="9" fill="#fff" font-weight="500">POST /v1/messages  ③</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- STEP 9: Claude responds with end_turn           -->
+  <!-- ═══════════════════════════════════════════════ -->
+
+  <rect x="15" y="718" width="24" height="24" rx="12" fill="#6366f1"/>
+  <text x="27" y="735" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">9</text>
+
+  <rect x="720" y="714" width="100" height="36" rx="6" fill="#fefce8" stroke="#fde68a" stroke-width="0.8"/>
+  <text x="770" y="729" text-anchor="middle" font-size="9" fill="#854d0e">thinks...</text>
+  <text x="770" y="743" text-anchor="middle" font-size="8" fill="#ca8a04">"all done!"</text>
+
+  <line x1="765" y1="764" x2="425" y2="764" stroke="#22c55e" stroke-width="1.5" marker-end="url(#ag)"/>
+  <rect x="475" y="752" width="262" height="18" rx="4" fill="#f0fdf4" stroke="#22c55e" stroke-width="0.8"/>
+  <text x="606" y="765" text-anchor="middle" font-size="9" fill="#166534">stop: end_turn → "I added logging to main.ts ..."</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- STEP 10: Agent shows result to human            -->
+  <!-- ═══════════════════════════════════════════════ -->
+
+  <rect x="15" y="782" width="28" height="24" rx="12" fill="#22c55e"/>
+  <text x="29" y="799" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">10</text>
+
+  <line x1="415" y1="790" x2="130" y2="790" stroke="#22c55e" stroke-width="2" marker-end="url(#ag)"/>
+  <rect x="155" y="778" width="230" height="18" rx="4" fill="#f0fdf4" stroke="#22c55e" stroke-width="1"/>
+  <text x="270" y="791" text-anchor="middle" font-size="9" fill="#166534" font-weight="500">✓ "I added logging to main.ts ..."</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- BONUS 1: MCP TOOL EXAMPLE                       -->
+  <!-- ═══════════════════════════════════════════════ -->
+
+  <rect x="45" y="825" width="1420" height="110" rx="10" fill="#eef2ff" stroke="#c7d2fe" stroke-width="1"/>
+  <text x="70" y="848" font-size="11" font-weight="600" fill="#3730a3">same pattern with MCP tools:</text>
+  <text x="70" y="865" font-size="9" fill="#64748b">If Claude decides it needs a GitHub PR instead of a local edit, the same loop applies:</text>
+
+  <!-- Mini flow -->
+  <rect x="70" y="878" width="120" height="28" rx="6" fill="#334155"/>
+  <text x="130" y="896" text-anchor="middle" font-size="8" fill="#fff">POST ④</text>
+
+  <line x1="195" y1="892" x2="220" y2="892" stroke="#64748b" stroke-width="1" marker-end="url(#a)"/>
+
+  <rect x="225" y="878" width="200" height="28" rx="6" fill="#fef2f2" stroke="#fecaca" stroke-width="0.8"/>
+  <text x="325" y="896" text-anchor="middle" font-size="8" fill="#dc2626">tool_use: { name: "create_pr", ... }</text>
+
+  <line x1="430" y1="892" x2="455" y2="892" stroke="#64748b" stroke-width="1" marker-end="url(#a)"/>
+
+  <rect x="460" y="878" width="100" height="28" rx="6" fill="#fff1f2" stroke="#fecdd3" stroke-width="0.8"/>
+  <text x="510" y="896" text-anchor="middle" font-size="8" fill="#be123c">✓ permission</text>
+
+  <line x1="565" y1="892" x2="590" y2="892" stroke="#64748b" stroke-width="1" marker-end="url(#a)"/>
+
+  <rect x="595" y="878" width="220" height="28" rx="6" fill="#eef2ff" stroke="#c7d2fe" stroke-width="0.8"/>
+  <text x="705" y="896" text-anchor="middle" font-size="8" fill="#3730a3">Local Agent → MCP Server → GitHub API</text>
+
+  <line x1="820" y1="892" x2="845" y2="892" stroke="#64748b" stroke-width="1" marker-end="url(#a)"/>
+
+  <rect x="850" y="878" width="160" height="28" rx="6" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="0.8"/>
+  <text x="930" y="896" text-anchor="middle" font-size="8" fill="#166534">tool_result: { pr_url: "..." }</text>
+
+  <line x1="1015" y1="892" x2="1040" y2="892" stroke="#64748b" stroke-width="1" marker-end="url(#a)"/>
+
+  <rect x="1045" y="878" width="120" height="28" rx="6" fill="#334155"/>
+  <text x="1105" y="896" text-anchor="middle" font-size="8" fill="#fff">POST ⑤</text>
+
+  <line x1="1170" y1="892" x2="1195" y2="892" stroke="#64748b" stroke-width="1" marker-end="url(#a)"/>
+
+  <rect x="1200" y="878" width="220" height="28" rx="6" fill="#f0fdf4" stroke="#22c55e" stroke-width="0.8"/>
+  <text x="1310" y="896" text-anchor="middle" font-size="8" fill="#166534">end_turn: "PR created ✓"</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- BONUS 2: SubAgent SPAWN EXAMPLE                 -->
+  <!-- ═══════════════════════════════════════════════ -->
+
+  <rect x="45" y="945" width="1420" height="130" rx="10" fill="#fff7ed" stroke="#fdba74" stroke-width="1"/>
+  <text x="70" y="968" font-size="11" font-weight="600" fill="#c2410c">Subagent spawning via Agent tool — independent context:</text>
+  <text x="70" y="985" font-size="9" fill="#64748b">If Claude outputs tool_use: Agent, the Local Agent creates a child with its own context, skills, and tools (cannot nest further):</text>
+
+  <!-- SubAgent mini flow -->
+  <rect x="70" y="1000" width="175" height="28" rx="6" fill="#fef2f2" stroke="#fecaca" stroke-width="0.8"/>
+  <text x="157" y="1018" text-anchor="middle" font-size="8" fill="#dc2626">tool_use: Agent(task, ...)</text>
+
+  <line x1="250" y1="1014" x2="275" y2="1014" stroke="#ea580c" stroke-width="1" marker-end="url(#ao)"/>
+
+  <rect x="280" y="998" width="180" height="32" rx="6" fill="#fff7ed" stroke="#fdba74" stroke-width="1.2"/>
+  <text x="370" y="1013" text-anchor="middle" font-size="8" font-weight="600" fill="#c2410c">spawn subagent</text>
+  <text x="370" y="1024" text-anchor="middle" font-size="7" fill="#ea580c">own instructions + skills + tools</text>
+
+  <line x1="465" y1="1014" x2="490" y2="1014" stroke="#ea580c" stroke-width="1" marker-end="url(#ao)"/>
+
+  <!-- Child agent's own loop -->
+  <rect x="495" y="993" width="560" height="42" rx="8" fill="#fff7ed" stroke="#fdba74" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <rect x="505" y="1000" width="100" height="28" rx="6" fill="#334155"/>
+  <text x="555" y="1018" text-anchor="middle" font-size="8" fill="#fff">child POST ①</text>
+
+  <line x1="610" y1="1014" x2="620" y2="1014" stroke="#64748b" stroke-width="1" marker-end="url(#a)"/>
+
+  <rect x="625" y="1000" width="110" height="28" rx="6" fill="#fefce8" stroke="#fde68a" stroke-width="0.8"/>
+  <text x="680" y="1018" text-anchor="middle" font-size="8" fill="#854d0e">tool_use → execute</text>
+
+  <line x1="740" y1="1014" x2="750" y2="1014" stroke="#64748b" stroke-width="1" marker-end="url(#a)"/>
+
+  <rect x="755" y="1000" width="100" height="28" rx="6" fill="#334155"/>
+  <text x="805" y="1018" text-anchor="middle" font-size="8" fill="#fff">child POST ②</text>
+
+  <line x1="860" y1="1014" x2="870" y2="1014" stroke="#64748b" stroke-width="1" marker-end="url(#a)"/>
+
+  <rect x="875" y="1000" width="170" height="28" rx="6" fill="#f0fdf4" stroke="#22c55e" stroke-width="0.8"/>
+  <text x="960" y="1018" text-anchor="middle" font-size="8" fill="#166534">child end_turn: result</text>
+
+  <!-- Result flows back to parent -->
+  <line x1="960" y1="1035" x2="960" y2="1052" stroke="#ea580c" stroke-width="1"/>
+  <line x1="960" y1="1052" x2="425" y2="1052" stroke="#ea580c" stroke-width="1.5" marker-end="url(#ao)"/>
+  <rect x="530" y="1040" width="340" height="18" rx="4" fill="#fff7ed" stroke="#fdba74" stroke-width="0.8"/>
+  <text x="700" y="1053" text-anchor="middle" font-size="8" fill="#c2410c">tool_result: Agent result → appended to parent messages[] → parent loop continues</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- KEY INSIGHTS                                    -->
+  <!-- ═══════════════════════════════════════════════ -->
+
+  <rect x="45" y="1088" width="700" height="50" rx="6" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="60" y="1107" font-size="9" font-weight="600" fill="#334155">Key takeaways:</text>
+  <text x="60" y="1121" font-size="8" fill="#64748b">• Local Agent always sits between Claude API and any tool — Claude never executes directly</text>
+  <text x="60" y="1133" font-size="8" fill="#64748b">• CLAUDE.md delivered as user message, not in system prompt</text>
+
+  <rect x="760" y="1088" width="700" height="50" rx="6" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="775" y="1107" font-size="9" font-weight="600" fill="#334155">What's new in the agent-aware loop:</text>
+  <text x="775" y="1121" font-size="8" fill="#64748b">• Skill descriptions loaded at start; full content loads only when invoked</text>
+  <text x="775" y="1133" font-size="8" fill="#64748b">• Subagent gets independent context/loop — cannot spawn further subagents</text>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ANNOTATIONS: loop bracket + request count       -->
+  <!-- ═══════════════════════════════════════════════ -->
+
+  <!-- Loop bracket on right side -->
+  <rect x="880" y="230" width="85" height="565" rx="6" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="922" y="520" text-anchor="middle" font-size="10" font-weight="700" fill="#6366f1" transform="rotate(90,922,520)">agentic loop — repeats until end_turn</text>
+
+  <!-- Request count annotations -->
+  <rect x="875" y="232" width="20" height="18" rx="3" fill="#334155"/>
+  <text x="885" y="246" text-anchor="middle" font-size="8" fill="#fff">①</text>
+  <rect x="875" y="482" width="20" height="18" rx="3" fill="#334155"/>
+  <text x="885" y="496" text-anchor="middle" font-size="8" fill="#fff">②</text>
+  <rect x="875" y="679" width="20" height="18" rx="3" fill="#334155"/>
+  <text x="885" y="693" text-anchor="middle" font-size="8" fill="#fff">③</text>
+
+  <!-- 3 requests annotation -->
+  <text x="900" y="825" font-size="10" font-weight="600" fill="#334155">This simple task = 3 API calls</text>
+  <text x="900" y="840" font-size="9" fill="#64748b">Complex tasks may take 10-50+ round trips</text>
+
+</svg>

@@ -187,6 +187,38 @@ export function StudyGuide() {
           </div>
         </div>
       </Section>
+
+      {/* Concepts */}
+      <Section
+        title="Concepts"
+        icon={<BookOpen size={16} className="text-indigo-500" />}
+        defaultOpen={false}
+        context="Understanding how Claude Code works under the hood — the architecture that powers this quiz application"
+      >
+        <div className="space-y-4">
+          <p className="text-sm text-[var(--muted-foreground)]">
+            These diagrams explain how Claude Code builds context and executes the agentic loop. The first diagram shows how user prompts, CLAUDE.md, agents, skills, tools, and request context come together. The second diagram shows the tool call cycle and how results are fed back into subsequent requests.
+          </p>
+          <div className="space-y-4">
+            <div className="bg-white rounded-lg border border-[var(--border)] p-4">
+              <div className="mb-3 text-sm font-semibold">Claude Code Architecture Diagram</div>
+              <img
+                src={`${import.meta.env.BASE_URL}diagrams/claude-diagram-v7-2.svg`}
+                alt="Claude Code Architecture Diagram"
+                className="w-full max-w-4xl mx-auto rounded shadow-sm"
+              />
+            </div>
+            <div className="bg-white rounded-lg border border-[var(--border)] p-4">
+              <div className="mb-3 text-sm font-semibold">Agentic Loop Diagram</div>
+              <img
+                src={`${import.meta.env.BASE_URL}diagrams/claude-agentic-loop-v2-2.svg`}
+                alt="Claude Code Agentic Loop Diagram"
+                className="w-full max-w-4xl mx-auto rounded shadow-sm"
+              />
+            </div>
+          </div>
+        </div>
+      </Section>
     </div>
   )
 }
